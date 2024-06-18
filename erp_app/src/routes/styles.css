@@ -17,9 +17,15 @@
 	--color-banner-text-2: #ff4a6a;
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
+	--side-nav-color: #1e354f;
 	font-family: var(--font-body);
 	color: var(--color-text);
 	--height: "2rem";
+}
+
+::-webkit-scrollbar{
+	width: 0;
+	height: 0;
 }
 
 .web-container div {

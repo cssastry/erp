@@ -1,0 +1,25 @@
+{
+	"/": [],
+	"/all": [
+		"src/routes/all/+page.ts"
+	],
+	"/all/about": [
+		"src/routes/all/about/+page.ts"
+	],
+	"/all/contact": [],
+	"/all/projects": [],
+	"/all/services": [],
+	"/app": [],
+	"/app/approvals": [],
+	"/app/calender": [],
+	"/app/chat": [],
+	"/app/dashboard": [],
+	"/app/employes": [],
+	"/app/leaves": [],
+	"/app/notifications": [],
+	"/app/payslips": [],
+	"/app/profile": [],
+	"/app/tasks": [],
+	"/app/tickets": [],
+	"/login": []
+}
