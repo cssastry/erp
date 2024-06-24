@@ -32,6 +32,7 @@ const add = async(req, res) => {
         let employDataArray = await employRepo.getById(id);
         let employData = employDataArray[0];
         let netPay = employData.netPay;
+        let {noOfWorkingDays, noOfDaysWorked} = req.body;
 
         let basicPay = 0.6 * netPay;
         let HRA = 0.4 * basicPay;

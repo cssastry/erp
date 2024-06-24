@@ -323,6 +323,7 @@
 		color: var(--color-bg-2);
 		border: none;
 		background-color: var(--color-banner-text-2);
+		cursor: pointer;
 	}
 	.banner-image img {
 		width: 100%;

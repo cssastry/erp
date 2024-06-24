@@ -16,13 +16,13 @@ const leavesModel = new Schema({
     title: {
         type: String,
     },
-    description: {
+    reason: {
         type: String,
     },
-    from: {
+    startDate: {
         type: String,
     },
-    to: {
+    endDate: {
         type: String,
     },
     status: {
