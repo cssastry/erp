@@ -2,7 +2,9 @@
     import logo from "$lib/images/logoS&M.svg";
     import loginImage from "$lib/images/login.png"
     import Grid from "svelte-grid-responsive";
-    import {message} from "antd"
+    import {message} from "antd";
+    import {login} from "../../api_calls/login_api";
+    import {add} from "../../api_calls/employes_api";
 
     // @ts-ignore
     let type = "login";
@@ -23,31 +25,36 @@
         confirmPassword: '',
     }
 
-    const handleLoginSubmit = () => {
+    const handleLoginSubmit = async () => {
         if (!loginData.email || !loginData.password) {
             message.error("Please fill in all fields");
             return;
         }
-        const userData = JSON.stringify(loginData);
-        localStorage.setItem("userData", userData);
-        message.success("login successfull")
-        console.log(loginData);
-        loginData = {email: '', password: ''}
-        window.location.href = '/app/dashboard'
+        const userData = await login(loginData);
+        if(userData.success){
+            localStorage.setItem("userData", JSON.stringify(userData.data));
+            message.success(userData.message);
+            loginData = {email: '', password: ''}
+            window.location.href = '/app/dashboard'
+        } else {
+            message.error(userData.messsage);
+            // alert(userData.message);
+        }
     }
 
-    const handleRegisterSubmit = () => {
+    const handleRegisterSubmit = async () => {
         if(registerData.password === registerData.confirmPassword){
             const data = {
                 email: registerData.email,
-                Password : registerData.password
-            }
-            const userData = JSON.stringify(data);
-            localStorage.setItem("userData", userData);
-            message.success("user registered successfully")
-            console.log(data);
+                password : registerData.password
+            };
+            const userData = await add(data);
+            // const userData = JSON.stringify(data);
+            // localStorage.setItem("userData", userData);
+            // message.success("user registered successfully");
+            console.log(userData);
             registerData = {email: '', password : '', confirmPassword: ''};
-            window.location.href = '/app/dashboard'
+            setType("login");
         } else {
             message.error("password dosen't match")
         }

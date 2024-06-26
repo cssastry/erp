@@ -26,6 +26,7 @@
 		"@fullcalendar/daygrid": "^6.1.11",
 		"@mui/icons-material": "^5.15.16",
 		"antd": "^5.17.0",
+		"axios": "^1.7.2",
 		"chart.js": "^4.4.2",
 		"jspdf": "^2.5.1",
 		"jspdf-autotable": "^3.8.2",

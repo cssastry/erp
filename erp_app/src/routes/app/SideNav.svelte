@@ -72,6 +72,12 @@
             icon: approvalIcon,
             path: "/app/approvals",
         },
+        {
+            id: 10,
+            name: "Holidays",
+            icon: approvalIcon,
+            path: "/app/holidays",
+        },
     ];
 
     /**

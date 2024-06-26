@@ -4,97 +4,16 @@
     import Grid from "svelte-grid-responsive";
     import calenderIcon from "$lib/images/icons/calender.svg";
     import {writable} from "svelte/store";
+    import { onMount } from "svelte";
+    import {getById} from "../../../api_calls/leaves_api";
 
-    const leaves = [
-        {
-            id: 1,
-            title: "Leave title",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 0,
-            reason: "It is a long established fact that a reader will be distracted"
-        },
-        {
-            id: 2,
-            title: "Leave title 2",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 1,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 3,
-            title: "Leave title 3",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 1,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 4,
-            title: "Leave title 4",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 2,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 5,
-            title: "Leave title 5",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 1,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 6,
-            title: "Leave title 6",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 2,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 7,
-            title: "Leave title 7",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 1,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 8,
-            title: "Leave title 8",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 1,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 9,
-            title: "Leave title 9",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 1,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 10,
-            title: "Leave title 10",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 2,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-        {
-            id: 11,
-            title: "Leave title 11",
-            startDate: "21/04/2024",
-            endDate: "22/04/2024",
-            status: 2,
-            reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-        },
-    ]
+    let leaves = [];
+    
+    onMount(async() => {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        let data = await getById(userData.employeeId);
+        leaves = data.data;
+    })
 
     // @ts-ignore
     const formatDuration = (startDate, endDate) => {
@@ -128,7 +47,6 @@
         const title = formData.get('title');
         const startDate = formData.get('startDate');
         const endDate = formData.get('endDate');
-        const status = 0;
         const reason = formData.get('reason');
 
         leaves.push({
@@ -186,22 +104,26 @@
         </div>
         <div class="leaves-list">
             <Grid container gutter={15}>
-                {#each leaves as item}
-                    <Grid xs={12} md={3} lg={3}>
-                        <div class="leaves-tab">
-                            <div class="leaves-head">
-                                <div class="details">
-                                    <p class="title">{item.title}</p>
-                                    <p class="duration">{formatDuration(item.startDate, item.endDate)}</p>
+                {#if leaves.length > 0}
+                    {#each leaves as item}
+                        <Grid xs={12} md={3} lg={3}>
+                            <div class="leaves-tab">
+                                <div class="leaves-head">
+                                    <div class="details">
+                                        <p class="title">{item.title}</p>
+                                        <p class="duration">{formatDuration(item.startDate, item.endDate)}</p>
+                                    </div>
+                                    <div class="status" style="background-color: {getStatusColor(item.status)};">
+                                        <p>{getStatusText(item.status)}</p>
+                                    </div>
                                 </div>
-                                <div class="status" style="background-color: {getStatusColor(item.status)};">
-                                    <p>{getStatusText(item.status)}</p>
-                                </div>
+                                <p class="reason">{item.reason}</p>
                             </div>
-                            <p class="reason">{item.reason}</p>
-                        </div>
-                    </Grid>
-                {/each}
+                        </Grid>
+                    {/each}
+                {:else}
+                    <p>No leaves applied</p>
+                {/if}
             </Grid>
         </div>
     </div>

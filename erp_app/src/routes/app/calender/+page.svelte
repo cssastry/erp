@@ -1,32 +1,3 @@
-<!-- <script>
-    import Calendar from "svelte-calendar";
-
-    let selectedDate = new Date();
-    let events = [
-        { date: new Date('2024-05-05'), title: 'Event 1' },
-        { date: new Date('2024-05-10'), title: 'Event 2' }
-    ];
-
-    // @ts-ignore
-    function handleDateClick(date) {
-        console.log('Clicked on date:', date);
-    }
-</script>
-
-<div class="calendar">
-    <Calendar {selectedDate} {events} on:dateClick={handleDateClick}/>
-</div>
-
-<style>
-    .calendar {
-        background-color: var(--side-nav-color);
-        min-height: 93%;
-        padding: 0 5rem;
-        border-radius: 0.3rem;
-    }
-</style> -->
-
-
 <script>
     import { onMount } from 'svelte';
     import { Calendar } from '@fullcalendar/core';
