@@ -4,8 +4,9 @@
     import Grid from "svelte-grid-responsive";
     import calenderIcon from "$lib/images/icons/calender.svg";
     import {writable} from "svelte/store";
+    import {message} from "antd";
     import { onMount } from "svelte";
-    import {getById} from "../../../api_calls/leaves_api";
+    import {getById, add} from "../../../api_calls/leaves_api";
 
     let leaves = [];
     
@@ -41,22 +42,28 @@
         showpopup.update(popup => ({ ...popup, visible: !popup.visible}));
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    const handleSubmit = async(event) => {
+        const userData = JSON.parse(localStorage.getItem("userData"));        event.preventDefault();
         const formData = new FormData(event.target);
         const title = formData.get('title');
         const startDate = formData.get('startDate');
         const endDate = formData.get('endDate');
         const reason = formData.get('reason');
 
-        leaves.push({
-            id: leaves.length + 1,
-            title: title,
-            startDate: startDate,
-            endDate: endDate,
-            status: status,
-            reason: reason,
-        });
+        let data = {
+            employeeId: userData.employeeId,
+            title,
+            startDate,
+            endDate,
+            reason,
+        }
+        let response = await add(data);
+        console.log(response);
+        if(response.success){
+            message.success(response.message);
+            let data = await getById(userData.employeeId);
+            leaves = data.data;
+        }
         showpopup.set({visible: false});
     }
 

@@ -4,7 +4,8 @@
     import Grid from "svelte-grid-responsive";
     import profileIcon from "$lib/images/icons/profile.svg";
     import { onMount } from "svelte";
-    import {getAll} from  "../../../api_calls/leaves_api";
+    import {message} from "antd";
+    import {getAll, update} from  "../../../api_calls/leaves_api";
 
     // @ts-ignore
     let leaves = [];
@@ -17,6 +18,19 @@
     // @ts-ignore
     const formatDuration = (startDate, endDate) => {
         return `${startDate} - ${endDate}`
+    }
+
+    const changeStatus = async (id, status) => {
+        let payload = {
+            status: status,
+        }
+        let response = await update(id, payload);
+        console.log(response);
+        if(response.success){
+            message.success(response.message);
+            let data = await getAll();
+            leaves = data.data;
+        }
     }
 
 </script>
@@ -34,28 +48,30 @@
         <div class="leaves-list">
             <Grid container gutter={15}>
                 {#each leaves as item}
-                    <Grid xs={12} md={4} lg={4}>
-                        <div class="leaves-tab">
-                            <div class="leaves-head">
-                                <div class="data">
-                                    <img src={profileIcon} alt="avatar">
-                                    <div class="details">
-                                        <p class="title">{item.title}</p>
-                                        <p class="duration">{formatDuration(item.startDate, item.endDate)}</p>
+                    {#if item.status === 0}
+                        <Grid xs={12} md={4} lg={4}>
+                            <div class="leaves-tab">
+                                <div class="leaves-head">
+                                    <div class="data">
+                                        <img src={profileIcon} alt="avatar">
+                                        <div class="details">
+                                            <p class="title">{item.title}</p>
+                                            <p class="duration">{formatDuration(item.startDate, item.endDate)}</p>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button class="status approve buttons" on:click={changeStatus(item._id, 1)}>
+                                            <p>Approve</p>
+                                        </button>
+                                        <button class="status reject buttons" on:click={changeStatus(item._id, 2)}>
+                                            <p>Reject</p>
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="buttons">
-                                    <button class="status approve buttons">
-                                        <p>Approve</p>
-                                    </button>
-                                    <button class="status reject buttons">
-                                        <p>Reject</p>
-                                    </button>
-                                </div>
+                                <p class="reason">{item.reason}</p>
                             </div>
-                            <p class="reason">{item.reason}</p>
-                        </div>
-                    </Grid>
+                        </Grid>
+                    {/if}
                 {/each}
             </Grid>
         </div>
