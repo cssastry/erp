@@ -5,7 +5,7 @@ const getAll = () => {
 };
 
 const getById = (id) => {
-    return leavesModel.find({employId: id});
+    return leavesModel.find({ employeeId: id });
 };
 
 const add = (data) => {
@@ -14,11 +14,11 @@ const add = (data) => {
 };
 
 const update = (id, data) => {
-    return leavesModel.findOneAndUpdate({_id: id}, {$set: data});
+    return leavesModel.findOneAndUpdate({ _id: id }, { $set: data });
 };
 
 const deleteById = (id) => {
-    return leavesModel.findOneAndDelete({_id: id});
+    return leavesModel.findOneAndDelete({ _id: id });
 };
 
 module.exports = {

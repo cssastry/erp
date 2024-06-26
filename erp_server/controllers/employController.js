@@ -1,10 +1,11 @@
 const employesRepo = require("../repos/employesRepo");
 const hashing = require("../utils/hashing");
+// const employeeHexHandler = require('../utils/employeeHexIdHandler');
 
 const getAll = async (req, res) => {
     try {
         let employes = await employesRepo.get();
-        if (employes){
+        if (employes) {
             res.status(200).send({
                 success: true,
                 message: "Employes fetched successfully",
@@ -27,9 +28,30 @@ const getAll = async (req, res) => {
 
 const add = async (req, res) => {
     try {
-        let hashedpassword = await hashing.passwordHashing(req.body.password);
-        req.body.password = hashedpassword;
-        let employ = await employesRepo.add(req.body);
+
+        console.log(req.body);
+        let exEmpId = await employesRepo.findEmpIdForHexa(req.body.employee);
+        console.log("exEmpId: ", exEmpId);
+        const ep0 = exEmpId[0].employeeId
+        const ep1 = ep0.slice(-3);
+        console.log("ep1: ", ep1);
+
+        const nextNumber = (parseInt(ep1, 10) + 1).toString().padStart(3, '0');
+        console.log("nextNumber: ", nextNumber);
+        const currentYear = new Date().getFullYear().toString().slice(-2);
+
+
+        // let newHexEmployeeId = employeeHexHandler.trimHexVal(exEmpId);
+        // console.log("newHexEmployeeId: ", newHexEmployeeId);
+        // let hashedpassword = await hashing.passwordHashing(req.body.password);
+        // console.log("hashedPassword: ", hashedpassword);
+        // req.body.password = hashedpassword;
+        const empdata = {
+            email: req.body.email,
+            password: req.body.password,
+            employeeId: `SM${currentYear}${nextNumber}`
+        }
+        let employ = await employesRepo.add(empdata);
         if (employ) {
             res.status(200).send({
                 success: true,
@@ -54,7 +76,7 @@ const update = async (req, res) => {
     try {
         let id = req.params.id;
         let updateData = req.body
-        if(updateData.password){
+        if (updateData.password) {
             let hashedPassword = await hashing.passwordHashing(updateData.password);
             updateData.password = hashedPassword;
         };
@@ -83,7 +105,7 @@ const getEmployById = async (req, res) => {
     try {
         let id = req.params.id;
         let employ = await employesRepo.getById(id);
-        if(employ) {
+        if (employ) {
             res.status(200).send({
                 success: true,
                 message: "Employ data fetched successfully",
@@ -108,7 +130,7 @@ const deleteById = async (req, res) => {
     try {
         let id = req.params.id;
         let deleteStatus = await employesRepo.deleteById(id);
-        if(deleteStatus) {
+        if (deleteStatus) {
             res.status(200).send({
                 success: true,
                 message: "Employ deleted successfully",

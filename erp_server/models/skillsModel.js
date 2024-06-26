@@ -8,31 +8,15 @@ function getCurrentIST() {
     return ISTTime;
 };
 
-const leavesModel = new Schema({
-    employeeId: {
+const skillsModel = new Schema({
+    skillName: {
         type: String,
         required: true,
     },
-    title: {
-        type: String,
-    },
-    reason: {
-        type: String,
-    },
-    startDate: {
-        type: String,
-    },
-    endDate: {
-        type: String,
-    },
-    status: {
-        type: Number,
-        default: 0,
-    }
 }, {
     timestamps: {
         currentTime: getCurrentIST
     }
 });
 
-module.exports = mongoose.model("leaves", leavesModel);
+module.exports = mongoose.model("skills", skillsModel);   

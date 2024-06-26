@@ -8,39 +8,31 @@ function getCurrentIST() {
     return ISTTime;
 };
 
-const employeesModel = new Schema({
-    employeeId: {
+const tasksModel = new Schema({
+    assignedId: {
         type: String,
         required: true,
     },
-    firstName: {
+    assigneeId: {
         type: String,
     },
-    lastName: {
-        type: String,
-    },
-    email: {
-        type: String,
-    },
-    mobileNumber: {
-        type: Number,
-    },
-    password: {
-        type: String,
-    },
-    netPay: {
-        type: Number,
-    },
-    address: {
-        type: String
-    },
-    accountNumber: {
-        type: String,
-    },
-}, {
-    timestamps: {
-        currentTime: getCurrentIST
-    }
-});
 
-module.exports = mongoose.model("employees", employeesModel);
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+    },
+    status: {
+        type: Number,
+    },
+
+},
+    {
+        timestamps: {
+            currentTime: getCurrentIST
+        }
+    });
+
+module.exports = mongoose.model("tasks", tasksModel);

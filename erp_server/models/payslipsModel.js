@@ -10,7 +10,7 @@ function getCurrentIST() {
 };
 
 const paySlipsModel = new Schema({
-    employId : {
+    employeeId: {
         type: String,
     },
     netPay: {
@@ -61,8 +61,10 @@ const paySlipsModel = new Schema({
     paySlip: {
         type: String,
     },
-}, {timestamps: {
-    currentTime: getCurrentIST
-}});
+}, {
+    timestamps: {
+        currentTime: getCurrentIST
+    }
+});
 
 module.exports = mongoose.model("payslips", paySlipsModel);

@@ -1,18 +1,18 @@
-const leavesRepo = require("../repos/leavesRepo");
+const holidayRepo = require("../repos/holidaysRepo");
 
 const getAll = async (req, res) => {
     try {
-        let leaves = await leavesRepo.getAll();
-        if (leaves) {
+        let holidays = await holidayRepo.getAll();
+        if (holidays) {
             res.status(200).send({
                 success: true,
-                message: "Leaves fetched successfully",
-                data: leaves,
+                message: "Holidays fetched successfully",
+                data: holidays,
             });
         } else {
             res.status(500).send({
                 success: false,
-                message: "Error while fetching leaves",
+                message: "Error while fetching holidays",
             });
         };
     } catch (error) {
@@ -24,44 +24,19 @@ const getAll = async (req, res) => {
     };
 };
 
-const getById = async (req, res) => {
-    try {
-        let id = req.params.id;
-        let levesData = await leavesRepo.getById(id);
-        if (levesData) {
-            res.status(200).send({
-                success: true,
-                message: "Leaves on employ fetched successfully",
-                data: levesData,
-            });
-        } else {
-            res.status(500).send({
-                success: false,
-                message: "Error while fetching leaves",
-            });
-        };
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success: false,
-            message: "Internal server error",
-        });
-    };
-};
-
 const add = async (req, res) => {
     try {
-        let addData = await leavesRepo.add(req.body);
+        let addData = await holidayRepo.add(req.body);
 
         if (addData) {
             res.status(200).send({
                 success: true,
-                message: "leave added successfully",
+                message: "Holiday added successfully",
             });
         } else {
             res.status(500).send({
                 success: false,
-                message: "Error while adding leave",
+                message: "Error while adding holidays",
             });
         };
     } catch (error) {
@@ -73,23 +48,23 @@ const add = async (req, res) => {
     };
 };
 
-const update = async (req, res) => {
+const updateById = async (req, res) => {
     try {
         let id = req.params.id;
         console.log("_id: ", id);
         console.log("req.body: ", req.body);
-        let updateData = await leavesRepo.update(id, req.body);
+        let updateData = await holidayRepo.update(id, req.body);
         console.log("updateData: ", updateData);
 
         if (updateData) {
             res.status(200).send({
                 success: true,
-                message: "Leave updated successfully",
+                message: "Holiday updated successfully",
             });
         } else {
             res.status(500).send({
                 success: false,
-                message: "Error while updating leave",
+                message: "Error while updating Holiday",
             });
         };
     } catch (error) {
@@ -104,16 +79,16 @@ const update = async (req, res) => {
 const deleteById = async (req, res) => {
     try {
         let id = req.params.id;
-        let deleteData = await leavesRepo.deleteById(id);
+        let deleteData = await holidayRepo.deleteById(id);
         if (deleteData) {
             res.status(200).send({
                 success: true,
-                message: "Leave deleted successfully",
+                message: "Holiday deleted successfully",
             });
         } else {
             res.status(500).send({
                 success: false,
-                message: "Error while deleting the leave",
+                message: "Error while deleting the Holiday",
             });
         };
     } catch (error) {
@@ -127,8 +102,7 @@ const deleteById = async (req, res) => {
 
 module.exports = {
     getAll,
-    getById,
     add,
-    update,
-    deleteById,
-};
+    updateById,
+    deleteById
+}
