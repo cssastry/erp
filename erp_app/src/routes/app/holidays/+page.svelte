@@ -6,102 +6,14 @@
         import {writable} from "svelte/store";
         import {message} from "antd";
         import { onMount } from "svelte";
+        import {getAll, add} from "../../../api_calls/holidays_api";
     
-        const leaves = [
-            {
-                id: 1,
-                title: "Leave title",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-            },
-            {
-                id: 2,
-                title: "Leave title 2",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-            },
-            {
-                id: 3,
-                title: "Leave title 3",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 1,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 4,
-                title: "Leave title 4",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 2,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 5,
-                title: "Leave title 5",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 1,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 6,
-                title: "Leave title 6",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 2,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 7,
-                title: "Leave title 7",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 1,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 8,
-                title: "Leave title 8",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 1,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 9,
-                title: "Leave title 9",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 1,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 10,
-                title: "Leave title 10",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 2,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-            {
-                id: 11,
-                title: "Leave title 11",
-                startDate: "21/04/2024",
-                endDate: "22/04/2024",
-                status: 2,
-                reason: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
-            },
-        ]
+        let leaves = [];
 
         onMount(async() => {
-            
+            const data = await getAll();
+            leaves = data.data;
         })
-    
-        // @ts-ignore
-        const formatDuration = (startDate, endDate) => {
-            return `${startDate} - ${endDate}`
-        }
     
         // @ts-ignore
         const getStatusText = (status) => {
@@ -124,24 +36,25 @@
             showpopup.update(popup => ({ ...popup, visible: !popup.visible}));
         }
     
-        function handleSubmit(event) {
+        const handleSubmit = async(event) => {
             event.preventDefault();
             const formData = new FormData(event.target);
             const title = formData.get('title');
-            const startDate = formData.get('startDate');
-            const endDate = formData.get('endDate');
-            const status = 0;
-            const reason = formData.get('reason');
+            const date = formData.get('date');
     
-            leaves.push({
-                id: leaves.length + 1,
-                title: title,
-                startDate: startDate,
-                endDate: endDate,
-                status: status,
-                reason: reason,
-            });
-            showpopup.set({visible: false});
+            let data = {
+                title,
+                date,
+            };
+            let response = await add(data);
+            if(response.success){
+                message.success(response.message);
+                const HolidayData = await getAll();
+                leaves = HolidayData.data;
+                showpopup.set({visible: false});
+            } else {
+                message.error(response.message)
+            }
         }
     
     </script>
@@ -160,14 +73,12 @@
         <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div class="popup-overlay" on:click={() => showpopup.set(false)}>
                 <div class="popup" on:click={(e) => e.stopPropagation()}>
-                    <h2>Raise a Ticket</h2>
+                    <h2>Add Holiday</h2>
                     <form on:submit={handleSubmit}>
                         <input type="text" name="title" placeholder="Enter Title" required>
-                        <input type="date" name="startDate" placeholder="Start Date" required>
-                        <input type="date" name="endDate" placeholder="End Date" required>
-                        <textarea name="reason" placeholder="Enter Reason" rows="4" required></textarea>
+                        <input type="date" name="date" placeholder="Start Date" required>
                         <div class="form-button">
-                            <button type="submit">Apply Leave</button>
+                            <button type="submit">Add</button>
                         </div>
                     </form>
                 </div>
@@ -175,7 +86,7 @@
         {/if}
         <div class="banner-text">
             <div class="head">
-                <h6>Leave Managment</h6>
+                <h6>Holidays</h6>
                 <div class="buttons">
                     <button class="calender" on:click={() => window.location.href = '/app/calender'}>
                         <img src={calenderIcon} alt="">
@@ -194,10 +105,9 @@
                                 <div class="leaves-head">
                                     <div class="details">
                                         <p class="title">{item.title}</p>
-                                        <p class="duration">{formatDuration(item.startDate, item.endDate)}</p>
+                                        <p class="duration">{item.date}</p>
                                     </div>
                                 </div>
-                                <!-- <p class="reason">{item.reason}</p> -->
                             </div>
                         </Grid>
                     {/each}
@@ -303,7 +213,7 @@
                 grid-template-columns: auto;
                 grid-row-gap: 10px;
             }
-            form input, form textarea{
+            form input{
                 background-color: var(--color-text);
                 padding: 0.8rem 0.8rem;
                 border: none;
@@ -312,7 +222,7 @@
                 color: var(--color-bg-4);
                 font-size: 1rem;
             }
-            form input::placeholder, form textarea::placeholder {
+            form input::placeholder {
                 color: var(--color-bg-4);
             }
             .popup h2 {

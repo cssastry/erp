@@ -78,6 +78,12 @@
             icon: approvalIcon,
             path: "/app/holidays",
         },
+        {
+            id: 11,
+            name: "Employ Roles",
+            icon: leavesIcon,
+            path: "/app/employapprovals"
+        }
     ];
 
     /**
