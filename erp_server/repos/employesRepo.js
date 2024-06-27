@@ -1,7 +1,7 @@
 const employesModel = require("../models/employesModel");
 
 const get = () => {
-    return employesModel.find({}, { _id: 0, password: 0, createdAt: 0, updatedAt: 0, __v: 0 });
+    return employesModel.find({}, { _id: 0, password: 0, createdAt: 0, updatedAt: 0, __v: 0 }).populate("roleId");
 };
 
 const add = (data) => {
@@ -11,7 +11,7 @@ const add = (data) => {
 
 const getById = (id) => {
     console.log("Email: ", id)
-    return employesModel.find({ email: id }, { _id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
+    return employesModel.find({ email: id }, { _id: 0, createdAt: 0, updatedAt: 0, __v: 0 }).populate("roleId");
 };
 
 const updateById = (id, data) => {

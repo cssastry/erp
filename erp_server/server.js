@@ -41,6 +41,8 @@ const projects = require("./routes/projectsRoutes");
 const employProjects = require("./routes/employesRoutes");
 const leaves = require('./routes/leavesRoute');
 const holidays = require('./routes/holidaysRoutes');
+const departments = require('./routes/departmentsRoutes');
+const roles = require('./routes/roleslkpRouter');
 
 // EndPoints
 app.use('/api/employes', employes);
@@ -50,5 +52,7 @@ app.use('/api/projects', projects);
 app.use('/api/employprojects', employProjects);
 app.use('/api/leaves', leaves);
 app.use('/api/holidays', holidays);
+app.use('/api/departments', departments);
+app.use('/api/roles', roles);
 
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));

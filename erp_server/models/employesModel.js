@@ -1,3 +1,4 @@
+const { type } = require("express/lib/response");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -37,6 +38,17 @@ const employeesModel = new Schema({
     accountNumber: {
         type: String,
     },
+    title: {
+        type: String,
+    },
+    roleId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'rolelkp'
+    },
+    status: {
+        type: Number,
+        default: 0,
+    }
 }, {
     timestamps: {
         currentTime: getCurrentIST
