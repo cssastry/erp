@@ -1,6 +1,7 @@
 <script>
 // @ts-nocheck
     import Grid from "svelte-grid-responsive";
+    import {page} from '$app/stores'
     import {onMount} from 'svelte';
     import menuIcon from "$lib/images/icons/menu.svg";
     import notificationIcon from "$lib/images/icons/notification.svg";
@@ -20,19 +21,20 @@
             <p>S&M Scholarly Solutions Employe Portal</p>
         </Grid>
         <Grid xs={4} md={4} lg={4}>
+            <!-- svelte-ignore missing-declaration -->
             <div class="icons">
                 <a href="/app/calender">
-                    <div class="icon-div">
+                    <div class="icon-div"  aria-current={$page.url.pathname === "/app/calender"?"page":undefined}>
                         <img src={calendarIcon} alt="icon" width="50%">
                     </div>
                 </a>
                 <a href="/app/notifications">
-                    <div class="icon-div">
+                    <div class="icon-div" aria-current={$page.url.pathname === "/app/notifications"?"page":undefined}>
                         <img src={notificationIcon} alt="icon" width="50%">
                     </div>
                 </a>
                 <a href="/app/profile">
-                    <div class="icon-div">
+                    <div class="icon-div" aria-current={$page.url.pathname === "/app/profile"?"page":undefined}>
                         <img src={profileIcon} alt="icon" width="50%">
                     </div>
                 </a>
@@ -71,5 +73,8 @@
         background-color: var(--color-bg-3);
         margin: 0 0.5rem;
         border-radius: 50%;
+    }
+    .icon-div[aria-current = "page"]{
+        background-color: var(--color-banner-text-2);
     }
 </style>

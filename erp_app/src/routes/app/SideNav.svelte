@@ -83,7 +83,13 @@
             name: "Employ Roles",
             icon: leavesIcon,
             path: "/app/employapprovals"
-        }
+        },
+        {
+            id: 12,
+            name: "Registrations",
+            icon: approvalIcon,
+            path: "/app/registrations",
+        },
     ];
 
     /**

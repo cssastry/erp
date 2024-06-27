@@ -26,7 +26,7 @@
                     title: leave.title,
                     start: currentDate.toISOString().split('T')[0],
                     allDay: true,
-                    color: 'blue' 
+                    color: '#4075a6' 
                 });
                 currentDate.setDate(currentDate.getDate() + 1);
             }
@@ -34,7 +34,7 @@
 
         // @ts-ignore
         holidaysData.data.forEach(holiday => {
-            holiday.color = 'green';
+            holiday.color = '#ff4a6a';
         });
 
         const calendarEl = document.getElementById('calendar');

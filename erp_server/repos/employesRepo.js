@@ -15,7 +15,7 @@ const getById = (id) => {
 };
 
 const updateById = (id, data) => {
-    return employesModel.findOneAndUpdate({ employId: id }, { $set: data });
+    return employesModel.findOneAndUpdate({ employeeId: id }, { $set: data });
 };
 
 const deleteById = (id) => {

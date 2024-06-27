@@ -141,6 +141,7 @@
                             <div class="data">
                                 <div class="details">
                                     <p class="title">{item.title}</p>
+                                    <p class="roleDepartment">{item.departmentId.title}</p>
                                 </div>
                             </div>
                         {/each}
@@ -204,6 +205,10 @@
         .details .title{
             font-size: 14px;
             font-weight: 500;
+        }
+        .roleDepartment{
+            font-size: 10px !important;
+            color: var(--color-text) !important;
         }
         .popup-overlay {
             z-index: 10;

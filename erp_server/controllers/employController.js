@@ -80,7 +80,10 @@ const update = async (req, res) => {
             let hashedPassword = await hashing.passwordHashing(updateData.password);
             updateData.password = hashedPassword;
         };
+        console.log(updateData);
+        console.log(id)
         let result = await employesRepo.updateById(id, updateData);
+        console.log(result);
         if (result) {
             res.status(200).send({
                 success: true,
