@@ -5,123 +5,65 @@
     import Grid from "svelte-grid-responsive";
     import personIcon from "$lib/images/icons/profile.svg";
     import addIcon from "$lib/images/icons/add.svg";
+    import {message} from "antd";
+    import { onMount } from "svelte";
+    import {getAll} from "../../../api_calls/projects_api";
+    import {getAll as getAllEmployes} from "../../../api_calls/employes_api";
+    import {getAllTasks, addTasks, updateTasks, getTaskById} from "../../../api_calls/tasks_api";
 
-    const projects = ["SRBS", "JagBandhu", "Nehwe", "ERP Solutions"]
-
-    const taskList = [
+    let projects = [];
+    let sprints = [];
+    let employes = [];
+    let type = ["Issue", "Bug"];
+    let priorityLevels = [
         {
             id: 1,
-            project: projects[0],
-            status: 0,
-            title: "Task 1",
-            duration: "12 hours",
-            assigned: personIcon,
+            name: "Low",
         },
         {
             id: 2,
-            project: projects[0],
-            status: 0,
-            title: "Task 2",
-            duration: "5 hours",
-            assigned: personIcon,
+            name: "Medium",
         },
         {
             id: 3,
-            project: projects[0],
-            status: 1,
-            title: "Task 3",
-            duration: "12 hours",
-            assigned: personIcon,
+            name: "High",
+        },
+    ];
+    let status = [
+        {
+            id: 0,
+            name: "TODO",
         },
         {
-            id: 4,
-            project: projects[0],
-            status: 2,
-            title: "Task 4",
-            duration: "12 hours",
-            assigned: personIcon,
+            id: 1,
+            name: "Progress",
         },
         {
-            id: 5,
-            project: projects[0],
-            status: 0,
-            title: "Task 5",
-            duration: "12 hours",
-            assigned: personIcon,
+            id: 2,
+            name: "Done",
         },
-        {
-            id: 6,
-            project: projects[0],
-            status: 0,
-            title: "Task 6",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 7,
-            project: projects[0],
-            status: 2,
-            title: "Task 7",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 8,
-            project: projects[1],
-            status: 0,
-            title: "Task 8",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 9,
-            project: projects[1],
-            status: 1,
-            title: "Task 9",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 10,
-            project: projects[1],
-            status: 2,
-            title: "Task 10",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 11,
-            project: projects[1],
-            status: 1,
-            title: "Task 11",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 12,
-            project: projects[1],
-            status: 2,
-            title: "Task 12",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 13,
-            project: projects[2],
-            status: 0,
-            title: "Task 13",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-        {
-            id: 14,
-            project: projects[2],
-            status: 0,
-            title: "Task 14",
-            duration: "12 hours",
-            assigned: personIcon,
-        },
-    ]
+    ];
+
+    let taskList = []
+
+    onMount(async() => {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        let projectsData = await getAll();
+        projects = projectsData.data;
+        let employesData = await getAllEmployes();
+        employes = employesData.data;
+        let taskData = await getTaskById(userData.employeeId);
+        taskList = taskData.data;
+    });
+
+    const getBackgroundColor = (type) => {
+        if(type === "Bug"){
+            return "#D70C0C";
+        }
+        if(type === "Issue"){
+            return "#007DE9"
+        }
+    }
 
     const selectedProject = writable(projects[0]);
 
@@ -133,9 +75,9 @@
         selectedProjectValue = value;
     });
 
-    $: todoTasks = taskList.filter(task => task.project === selectedProjectValue && task.status === 0);
-    $: progressTasks = taskList.filter(task => task.project === selectedProjectValue && task.status === 1);
-    $: doneTasks = taskList.filter(task => task.project === selectedProjectValue && task.status === 2);
+    $: todoTasks = taskList.filter(task => task.projectId._id === selectedProjectValue && task.status === 0);
+    $: progressTasks = taskList.filter(task => task.projectId._id === selectedProjectValue && task.status === 1);
+    $: doneTasks = taskList.filter(task => task.projectId._id === selectedProjectValue && task.status === 2);
 
     /**
    * @param {{ target: { value: string; }; }} event
@@ -150,25 +92,67 @@
         showPopup.update(popup => ({ ...popup, visible: !popup.visible, formType: formType }));
     }
 
-    function handleSubmit(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        const userData = JSON.parse(localStorage.getItem("userData"));
         const formData = new FormData(event.target);
         const project = formData.get('project');
         const title = formData.get('title');
-        const duration = formData.get('duration');
+        const points = formData.get('points');
+        const priority = formData.get('priority');
+        const assignedTo = formData.get('assignedTo');
+        const type = formData.get('type');
+        const description = formData.get('description');
         const formType = $showPopup.formType;
-        const status = formType === 0 ? 0 : 1;
 
-        taskList.push({
-            id: taskList.length + 1,
-            project: project,
-            status: status,
+        let data = {
             title: title,
-            duration: duration,
-            assigned: personIcon,
-        });
-        showPopup.set({ visible: false, formType: formType });
+            description: description,
+            points: points,
+            priority: priority,
+            createdBy: userData.employeeId,
+            assignedTo: assignedTo,
+            projectId: project,
+            type: type,
+            sprintId: 1,
+        };
+        let response = await addTasks(data);
+        if(response.success){
+            message.success(response.message);
+            showPopup.set({ visible: false, formType: formType });
+            let taskData = await getAllTasks();
+            taskList = taskData.data;
+        } else {
+            message.error(response.error);
+        }
     }
+
+    const taskDetailsPopup = writable({ visible: false, task: null });
+    
+    const handleTaskClick = (task) => {
+        taskDetailsPopup.set({ visible: true, task: task });
+    };
+
+    const handleStatusChange = async (event, task) => {
+        const newStatus = event.target.value;
+        let data = {
+            status: newStatus,
+        };
+        let response = await updateTasks(task._id, data)
+        if(response.success) {
+            let userData = JSON.parse(localStorage.getItem("userData"));
+            message.success(response.message);
+            let taskData = await getTaskById(userData.employeeId);
+            taskList = taskData.data;
+        } else {
+            message.error(response.message);
+        }
+    }
+
+    const getPriorityName = (priorityId) => {
+        const priority = priorityLevels.find(p => p.id === priorityId);
+        return priority ? priority.name : "Unknown";
+    };
 
 </script>
 
@@ -191,11 +175,30 @@
                     <select name="project" required>
                         <option value="" disabled selected hidden>Choose Project</option>
                         {#each projects as project}
-                            <option value={project}>{project}</option>
+                            <option value={project._id}>{project.title}</option>
                         {/each}
                     </select>
                     <input type="text" name="title" placeholder="Enter Title" required>
-                    <input type="text" name="duration" placeholder="Enter Duration" required>
+                    <input type="text" name="points" placeholder="Enter Points" required>
+                    <select name="priority" required>
+                        <option value="" disabled selected hidden>Choose Priority</option>
+                        {#each priorityLevels as priority}
+                            <option value={priority.id}>{priority.name}</option>
+                        {/each}
+                    </select>
+                    <select name="assignedTo" required>
+                        <option value="" disabled selected hidden>Assign To</option>
+                        {#each employes as employe}
+                            <option value={employe.employeeId}>{employe.email}</option>
+                        {/each}
+                    </select>
+                    <select name="type" required>
+                        <option value="" disabled selected hidden>Choose Type</option>
+                        {#each type as t}
+                            <option value={t}>{t}</option>
+                        {/each}
+                    </select>
+                    <textarea name="description" placeholder="Enter Description"></textarea>
                     <div class="form-button">
                         <button type="submit">Add Task</button>
                     </div>
@@ -203,70 +206,126 @@
             </div>
         </div>
     {/if}
+    {#if $taskDetailsPopup.visible}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <div class="popup-overlay" on:click={() => taskDetailsPopup.set({ visible: false, task: null })}>
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div class="popup" on:click={(e) => e.stopPropagation()}>
+                {#if $taskDetailsPopup.task}
+                    <div class="heading">
+                        <div class="titleType" style="display: flex; gap: 0.4rem">
+                            <h2>{$taskDetailsPopup.task.title}</h2>
+                            <p class="type" style="background-color: {getBackgroundColor($taskDetailsPopup.task.type)};">{$taskDetailsPopup.task.type}</p>
+                        </div>
+                        <select name="status" value={$taskDetailsPopup.task.status} on:change={(event) => handleStatusChange(event, $taskDetailsPopup.task)} required>
+                            {#each status as status}
+                                <option value={status.id}>{status.name}</option>
+                            {/each}
+                        </select>
+                    </div>
+                    <div class="details">
+                        <div class="level">
+                            <p>Priority: <span>{getPriorityName($taskDetailsPopup.task.priority)}</span></p>
+                            <p>Points: <span>{$taskDetailsPopup.task.points}</span></p>
+                            <p>Created By: <span>{$taskDetailsPopup.task.createdBy}</span></p>
+                        </div>
+                        <p class="desc">
+                            {$taskDetailsPopup.task.description}
+                        </p>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    {/if}
+
     <div class="banner-text">
         <div class="head">
             <h6>Projects /</h6>
             <select bind:value={$selectedProject} on:change={handleProjectChange}>
+                <option value="" disabled selected>Select Project</option>
                 {#each projects as project}
-                    <option value={project}>{project}</option>
+                    <option value={project._id}>{project.title}</option>
                 {/each}
             </select>
         </div>
         <div class="work">
-            <Grid xs={12} md={4} lg={4}>
-                <div class="todo">
-                    <div class="heading">
-                        <p>ToDo</p>
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                        <img src={addIcon} alt="icon" on:click={() => togglePopup(0)}>
-                    </div>
-                    {#each todoTasks as task}
-                        <div class="data">
-                            <div class="details">
-                                <p class="title">{task.title}</p>
-                                <p class="duration">{task.duration}</p>
-                            </div>
-                            <img src={task.assigned} alt="assigned">
+            {#if selectedProjectValue}
+                <Grid xs={12} md={4} lg={4}>
+                    <div class="todo">
+                        <div class="heading">
+                            <p>ToDo</p>
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                            <img src={addIcon} alt="icon" on:click={() => togglePopup(0)}>
                         </div>
-                    {/each}
-                </div>
-            </Grid>
-            <Grid xs={12} md={4} lg={4}>
-                <div class="progress">
-                    <div class="heading">
-                        <p>Progress</p>
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                        <img src={addIcon} alt="icon" on:click={() => togglePopup(1)}>
+                        {#if todoTasks.length > 0}
+                            {#each todoTasks as task}
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                <!-- svelte-ignore a11y-no-static-element-interactions -->
+                                <div class="data" on:click={() => {handleTaskClick(task)}}>
+                                    <div class="details">
+                                        <p class="title">{task.title}</p>
+                                        <p class="duration" style="background-color: {getBackgroundColor(task.type)};">{task.type}</p>
+                                    </div>
+                                    <img src={task.assigned} alt="assigned">
+                                </div>
+                            {/each}
+                        {:else}
+                            <p>You have no tasks</p>
+                        {/if}
                     </div>
-                    {#each progressTasks as task}
-                        <div class="data">
-                            <div class="details">
-                                <p class="title">{task.title}</p>
-                                <p class="duration">{task.duration}</p>
-                            </div>
-                            <img src={task.assigned} alt="assigned">
+                </Grid>
+                <Grid xs={12} md={4} lg={4}>
+                    <div class="progress">
+                        <div class="heading">
+                            <p>Progress</p>
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                            <img src={addIcon} alt="icon" on:click={() => togglePopup(1)}>
                         </div>
-                    {/each}
-                </div>
-            </Grid>
-            <Grid xs={12} md={4} lg={4}>
-                <div class="done">
-                    <div class="heading">
-                        <p>Done</p>
+                        <!-- svelte-ignore a11y-no-static-element-interactions -->
+                        {#if progressTasks.lenght > 1}
+                            {#each progressTasks as task}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <div class="data" on:click={() => {handleTaskClick(task)}}>
+                                    <div class="details">
+                                        <p class="title">{task.title}</p>
+                                        <p class="duration" style="background-color: {getBackgroundColor(task.type)};">{task.type}</p>
+                                    </div>
+                                    <img src={task.assigned} alt="assigned">
+                                </div>
+                            {/each}
+                        {:else}
+                            <p>You have no tasks</p>
+                        {/if}
                     </div>
-                    {#each doneTasks as task}
-                        <div class="data">
-                            <div class="details">
-                                <p class="title">{task.title}</p>
-                                <p class="duration">{task.duration}</p>
-                            </div>
-                            <img src={task.assigned} alt="assigned">
+                </Grid>
+                <Grid xs={12} md={4} lg={4}>
+                    <div class="done">
+                        <div class="heading">
+                            <p>Done</p>
                         </div>
-                    {/each}
-                </div>
-            </Grid>
+                        <!-- svelte-ignore a11y-no-static-element-interactions -->
+                        {#if doneTasks.length > 1}
+                            {#each doneTasks as task}
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                <div class="data" on:click={() => {handleTaskClick(task)}}>
+                                    <div class="details">
+                                        <p class="title">{task.title}</p>
+                                        <p class="duration" style="background-color: {getBackgroundColor(task.type)};">{task.type}</p>
+                                    </div>
+                                    <img src={task.assigned} alt="assigned">
+                                </div>
+                            {/each}
+                        {:else}
+                            <p>You have no tasks</p>
+                        {/if}
+                    </div>
+                </Grid>
+            {:else}
+                <p>Please select the project</p>
+            {/if}
         </div>
     </div>
 </div>
@@ -314,8 +373,13 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding-bottom: 0.2rem;
         border-bottom: 1px solid var(--color-bg-1);
+    }
+    .heading h2{
+        padding: 0;
+        margin: 0;
     }
     .heading p{
         font-size: 20px;
@@ -345,7 +409,14 @@
     }
     .details .duration{
         font-size: 12px;
-        color: var(--color-text);
+        color: var(--color-bg-0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        margin-top: 0.3rem;
+        border-radius: 0.3rem;
+        font-weight: 500;
     }
     .data img{
         width: 6%;
@@ -392,10 +463,26 @@
         color: var(--color-bg-4);
         font-size: 1rem;
     }
+    select{
+        background-color: var(--color-text);
+        padding: 0.8rem 0.8rem;
+        border: none;
+        margin-top: 0.2rem;
+        border-radius: 0.5rem;
+        color: var(--color-bg-4);
+        font-size: 1rem;
+    }
     form input::placeholder, form select::placeholder {
         color: var(--color-bg-4);
     }
+    select::placeholder{
+        color: var(--color-bg-4);
+    }
     form select option {
+        background-color: var(--color-bg-4);
+        color: var(--color-bg-0);
+    }
+    select option {
         background-color: var(--color-bg-4);
         color: var(--color-bg-0);
     }
@@ -418,5 +505,28 @@
         color: var(--color-bg-1);
         font-weight: 600;
         cursor: pointer;
+    }
+    .details{
+        margin-top: 1rem;
+    }
+    .level{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .level p span{
+        font-weight: 500;
+        color: var(--color-bg-1);
+    }
+    .heading .type{
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--color-bg-0);
+        padding: 0.1rem 0.8rem;
+        border-radius: 0.5rem;
+    }
+    .details .desc{
+        margin-top: 1rem;
+        color: var(--color-bg-2);
     }
 </style>

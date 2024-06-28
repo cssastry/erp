@@ -82,13 +82,19 @@
             id: 11,
             name: "Employ Roles",
             icon: leavesIcon,
-            path: "/app/employapprovals"
+            path: "/app/employapprovals",
         },
         {
             id: 12,
             name: "Registrations",
             icon: approvalIcon,
             path: "/app/registrations",
+        },
+        {
+            id: 13,
+            name: "Projects",
+            icon: payslipIcon,
+            path: "/app/projects",
         },
     ];
 
