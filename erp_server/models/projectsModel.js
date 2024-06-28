@@ -12,18 +12,22 @@ const projectsModel = new Schema({
     title: {
         type: String,
     },
-    description: {
+    summary: {
+        type: String,
+    },
+    client: {
         type: String,
     },
     startDate: {
         type: String,
     },
-    endDate: {
+    logo: {
         type: String,
-        default: "Present",
     },
-},{timestamps: {
-    currentTime: getCurrentIST
-}});
+}, {
+    timestamps: {
+        currentTime: getCurrentIST
+    }
+});
 
 module.exports = mongoose.model("projects", projectsModel);

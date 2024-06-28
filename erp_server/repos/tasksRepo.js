@@ -1,11 +1,11 @@
 const tasksModel = require("../models/tasksModel");
 
 const getAll = () => {
-    return tasksModel.find();
+    return tasksModel.find().populate("projectId");
 };
 
 const getById = (id) => {
-    return tasksModel.find({ _id: id });
+    return tasksModel.find({ assignedTo: id }).populate("projectId");
 };
 
 const add = (data) => {

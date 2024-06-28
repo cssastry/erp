@@ -14,6 +14,10 @@ app.use(cors());
 
 const filePath = path.join(__dirname, "logs", "request.log");
 const accessLogStream = fs.createWriteStream(filePath, { flags: 'a' });
+const uploadsPath = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsPath)) {
+    fs.mkdirSync(uploadsPath);
+}
 app.use(morgan(':method :url :status :res[content-length] :response-time ms', { stream: accessLogStream }));
 app.use(morgan(':method :url :status :res[content-length] :response-time ms'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -43,6 +47,8 @@ const leaves = require('./routes/leavesRoute');
 const holidays = require('./routes/holidaysRoutes');
 const departments = require('./routes/departmentsRoutes');
 const roles = require('./routes/roleslkpRouter');
+const sprints = require('./routes/sprintsRoute');
+const tasks = require('./routes/tasksRoutes');
 
 // EndPoints
 app.use('/api/employes', employes);
@@ -54,5 +60,7 @@ app.use('/api/leaves', leaves);
 app.use('/api/holidays', holidays);
 app.use('/api/departments', departments);
 app.use('/api/roles', roles);
+app.use('/api/sprints', sprints);
+app.use('/api/tasks', tasks)
 
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));

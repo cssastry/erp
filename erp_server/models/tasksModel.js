@@ -9,23 +9,42 @@ function getCurrentIST() {
 };
 
 const tasksModel = new Schema({
-    assignedId: {
-        type: String,
-        required: true,
-    },
-    assigneeId: {
-        type: String,
-    },
-
     title: {
         type: String,
-        required: true
     },
     description: {
         type: String,
     },
+    points: {
+        type: Number,
+    },
+    priority: {
+        type: Number,
+    },
+    createdBy: {
+        type: String
+    },
+    assignedTo: {
+        type: String
+    },
+    projectId: {
+        type: mongoose.Types.ObjectId,
+        ref: "projects"
+    },
+    type: {
+        type: String
+    },
+    // sprintId: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "sprints"
+    // },
+    sprintId: {
+        type: Number,
+        default: 1
+    },
     status: {
         type: Number,
+        default: 0
     },
 
 },
