@@ -51,18 +51,28 @@ const add = async (req, res) => {
             password: req.body.password,
             employeeId: `SM${currentYear}${nextNumber}`
         }
-        let employ = await employesRepo.add(empdata);
-        if (employ) {
-            res.status(200).send({
-                success: true,
-                message: "Employ added successfully",
+        let employExists = await employesRepo.getEmployByEmail(empdata.email);
+        if (employExists.length > 0) {
+            res.status(400).send({
+                success: false,
+                message: "Employ email already exists",
             });
         } else {
-            res.status(500).send({
-                success: false,
-                message: "Problem facing in adding employ",
-            });
-        };
+
+            let employ = await employesRepo.add(empdata);
+            if (employ) {
+                res.status(200).send({
+                    success: true,
+                    message: "Employ added successfully",
+                });
+            } else {
+                res.status(500).send({
+                    success: false,
+                    message: "Problem facing in adding employ",
+                });
+            };
+        }
+
     } catch (error) {
         console.log(error);
         res.status(500).send({
