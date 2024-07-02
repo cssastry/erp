@@ -96,6 +96,12 @@
             icon: payslipIcon,
             path: "/app/projects",
         },
+        {
+            id: 14,
+            name: "Tech Stack",
+            icon: payslipIcon,
+            path: "/app/techstack",
+        },
     ];
 
     /**

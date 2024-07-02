@@ -1,73 +1,107 @@
 <script>
     // @ts-nocheck
     
-        import Grid from "svelte-grid-responsive";
-        import calenderIcon from "$lib/images/icons/calender.svg";
-        import {writable} from "svelte/store";
-        import {message} from "antd";
-        import { onMount } from "svelte";
-        import {getAll, add} from "../../../api_calls/projects_api";
-        import projectImage1 from "$lib/images/clients/cms.png";
+    import Grid from "svelte-grid-responsive";
+    import { writable } from "svelte/store";
+    import { message } from "antd";
+    import { onMount } from "svelte";
+    import { getAll, add } from "../../../api_calls/projects_api";
+    import { getprojectTechStackById, addprojectTechStack, deleteByIdprojectTechStack } from "../../../api_calls/projectTechStack_api";
+    import { getAllTechStack } from "../../../api_calls/techStack_api";
     
-        let projects = [];
-        
-        onMount(async() => {
+    let projects = [];
+    const showpopup = writable({ visible: false });
+    let selectedProject = writable(null);
+    let projectTechStack = [];
+    let allTechStack = [];
+    let techstackClicked = false;
+    
+    onMount(async () => {
+        let data = await getAll();
+        projects = data.data;
+    });
+    
+    function togglepopup() {
+        showpopup.update(popup => ({ ...popup, visible: !popup.visible }));
+    }
+    
+    const handleaddtechstackButton = () => {
+        techstackClicked = !techstackClicked;
+    }
+    
+    const showProjectDetails = async (project) => {
+        selectedProject.set(project);
+        let techStack = await getprojectTechStackById(project._id);
+        projectTechStack = techStack.data;
+        let techData = await getAllTechStack();
+        allTechStack = techData.data;
+        allTechStack = allTechStack.filter(tech => !projectTechStack.find(etech => etech.techStackId._id === tech._id));
+        showpopup.set({ visible: true });
+    }
+    
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        let title = event.target.title.value;
+        let startDate = event.target.startDate.value;
+        let client = event.target.client.value;
+        let summary = event.target.summary.value;
+        let logo = event.target.logo.files[0];
+    
+        var formData = new FormData();
+        formData.append("title", title);
+        formData.append("startDate", startDate);
+        formData.append("client", client);
+        formData.append("summary", summary);
+        formData.append("logo", logo);
+        formData.append("logo", logo, logo.name);
+    
+        let response = await add(formData);
+        if (response.success) {
+            message.success(response.message);
             let data = await getAll();
             projects = data.data;
-        })
-    
-        const showpopup = writable({visible: false});
-    
-        function togglepopup() {
-            showpopup.update(popup => ({ ...popup, visible: !popup.visible}));
         }
+        showpopup.set({ visible: false });
+    }
     
-        const handleSubmit = async(event) => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const title = formData.get('title');
-            const startDate = formData.get('startDate');
-            const client = formData.get('client');
-            const summary = formData.get('summary');
+    const addTechStack = async (techId) => {
+        let data = {
+            projectId: $selectedProject._id,
+            techStackId: techId
+        };
+        let response = await addprojectTechStack(data);
+        let techdata = await getprojectTechStackById($selectedProject._id);
+        projectTechStack = techdata.data;
+    }
     
-            let data = {
-                title,
-                startDate,
-                client,
-                summary,
-            }
-            let response = await add(data);
-            console.log(response);
-            if(response.success){
-                message.success(response.message);
-                let data = await getAll();
-                leaves = data.data;
-            }
-            showpopup.set({visible: false});
-        }
-    
+    const deleteTechStack = async (techId) => {
+        let response = await deleteByIdprojectTechStack(techId);
+        console.log(response.data);
+    }
     </script>
     
+    <!-- svelte-ignore missing-declaration -->
     <svelte:head>
         <title>Projects</title>
         <meta name="description" content="Svelte demo app" />
     </svelte:head>
     
     <div class="leaves">
-        <!-- popup -->
-        {#if $showpopup.visible}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div class="popup-overlay" on:click={() => showpopup.set(false)}>
+        <!-- Add Project Popup -->
+        {#if $showpopup.visible && !$selectedProject}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div class="popup-overlay" on:click={() => showpopup.set({ visible: false })}>
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <div class="popup" on:click={(e) => e.stopPropagation()}>
-                    <h2>Raise a Ticket</h2>
+                    <h2>Add new project</h2>
                     <form on:submit={handleSubmit}>
                         <input type="text" name="title" placeholder="Enter Title" required>
                         <input type="text" name="client" placeholder="Enter client Name" required>
                         <input type="date" name="startDate" placeholder="Start Date" required>
                         <textarea name="summary" placeholder="summary" rows="4" required></textarea>
+                        <input type="file" name="logo" accept="image/*" required>
                         <div class="form-button">
                             <button type="submit">Add Project</button>
                         </div>
@@ -75,6 +109,74 @@
                 </div>
             </div>
         {/if}
+    
+        <!-- Project Details Popup -->
+        {#if $showpopup.visible && $selectedProject}
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div class="popup-overlay" on:click={() => showpopup.set({ visible: false })}>
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div class="popup" on:click={(e) => e.stopPropagation()}>
+                    <div class="form-button">
+                        <button on:click={() => showpopup.set({ visible: false })}>X</button>
+                    </div>
+                    <h2>Project Details</h2>
+                    <div class="details">
+                        <p><strong>Title:</strong> {$selectedProject.title}</p>
+                        <p><strong>Client:</strong> {$selectedProject.client}</p>
+                        <p><strong>Start Date:</strong> {$selectedProject.startDate}</p>
+                        <p><strong>Summary:</strong> {$selectedProject.summary}</p>
+                        <br/>
+                        {#if projectTechStack.length === 0}
+                            {#if techstackClicked}
+                                <div class="techlist">
+                                    <div class="showSelected">
+                                        {#each projectTechStack as tech}
+                                            <span class="techName">{tech.techStackId.title}</span>
+                                        {/each}
+                                    </div>
+                                    <div class="showAlltech">
+                                        {#each allTechStack as tech}
+                                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                            <span class="techName" on:click={() => addTechStack(tech._id)}>{tech.title}</span>
+                                        {/each}
+                                    </div>
+                                </div>
+                            {/if}
+                            <button class="add" on:click={() => handleaddtechstackButton()}>{techstackClicked ? "Save" : "Add Techstack"}</button>
+                        {:else}
+                            {#if !techstackClicked}
+                                <div class="tech">
+                                    <p class="techHeading">TechStack :</p>
+                                    {#each projectTechStack as name}
+                                        <span class="technology">{name.techStackId.title} ,</span>
+                                    {/each}
+                                </div>
+                            {/if}
+                            {#if techstackClicked}
+                                <div class="techlist">
+                                    <div class="showSelected">
+                                        {#each projectTechStack as tech}
+                                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                            <span class="techName" on:click={() => deleteTechStack(tech.techStackId._id)}>{tech.techStackId.title} &times; </span>
+                                        {/each}
+                                    </div>
+                                    <div class="showAlltech">
+                                        <!-- svelte-ignore missing-declaration -->
+                                        {#each allTechStack as tech}
+                                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                            <span class="techName" on:click={() => addTechStack(tech._id)}>{tech.title}</span>
+                                        {/each}
+                                    </div>
+                                </div>
+                            {/if}
+                            <button class="add" on:click={() => handleaddtechstackButton()}>{techstackClicked ? "Save" : "Add Techstack"}</button>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        {/if}
+    
         <div class="banner-text">
             <div class="head">
                 <h6>Projects</h6>
@@ -87,20 +189,20 @@
             <div class="leaves-list">
                 <Grid container gutter={15}>
                     {#if projects.length > 0}
-                        {#each projects as item}
-                            <Grid xs={12} md={12} lg={12}>
-                                <div class="leaves-tab">
+                        {#each projects as item, index}
+                            <!-- svelte-ignore a11y-no-static-element-interactions -->
+                            <Grid xs={12} md={4} lg={4}>
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                <div class="leaves-tab" on:click={() => showProjectDetails(item)}>
                                     <div class="leaves-head">
                                         <div class="details">
                                             <p class="title">{item.title}</p>
-                                            <p class="duration">{item.startDate}</p>
-                                        </div>
-                                        <div class="status">
-                                            <img src={projectImage1} alt="client logo" width="100rem">
                                             <p class="clientName">{item.client}</p>
                                         </div>
+                                        <div class="status">
+                                            <img src={`data:image/jpeg;base64,${item.logo}`} alt="client logo" width="100rem">
+                                        </div>
                                     </div>
-                                    <p class="reason">{item.summary}</p>
                                 </div>
                             </Grid>
                         {/each}
@@ -161,34 +263,22 @@
             background-color: var(--color-bg-3);
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            min-height: 10rem;
-            max-height: 10rem;
-            overflow-y: scroll;
+            cursor: pointer;
         }
         .leaves-head{
             margin-bottom: 0.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 0 0.5rem 0.5rem;
-            border-bottom: 1px solid var(--color-bg-0);
         }
         .details .title{
             font-size: 1.2rem;
-        }
-        .details .duration{
-            font-size: 0.8rem;
-            color: var(--color-text);
         }
         .status{
             padding: 0.2rem 0.8rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        .leaves-tab .reason{
-            font-size: 0.7rem;
-            color: var(--color-text);
         }
         .popup-overlay {
             z-index: 10;
@@ -201,50 +291,102 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            }
-            .popup {
-                background-color: var(--color-bg-3);
-                width: 50%;
-                height: auto;
-                padding: 2rem;
-                border-radius: 8px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            }
-            .popup form {
-                display: grid;
-                grid-template-columns: auto;
-                grid-row-gap: 10px;
-            }
-            form input, form textarea{
-                background-color: var(--color-text);
-                padding: 0.8rem 0.8rem;
-                border: none;
-                margin-top: 0.2rem;
-                border-radius: 0.5rem;
-                color: var(--color-bg-4);
-                font-size: 1rem;
-            }
-            form input::placeholder, form textarea::placeholder {
-                color: var(--color-bg-4);
-            }
-            .popup h2 {
-                margin-top: 0;
-                color: var(--color-bg-0);
-                font-size: 25px;
-            }
-            .form-button{
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-            }
-            form button{
-                background-color: var(--color-banner-text-2);
-                border: none;
-                padding: 0.8rem 2.5rem;
-                margin-top: 0.8rem;
-                border-radius: 0.3rem;
-                color: var(--color-bg-1);
-                font-weight: 600;
-                cursor: pointer;
-            }
+        }
+        .popup {
+            background-color: var(--color-bg-3);
+            width: 50%;
+            height: auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .popup form {
+            display: grid;
+            grid-template-columns: auto;
+            grid-row-gap: 10px;
+        }
+        form input, form textarea {
+            background-color: var(--color-text);
+            padding: 0.8rem 0.8rem;
+            border: none;
+            margin-top: 0.2rem;
+            border-radius: 0.5rem;
+            color: var(--color-bg-4);
+            font-size: 1rem;
+        }
+        form input::placeholder, form textarea::placeholder {
+            color: var(--color-bg-4);
+        }
+        .popup h2 {
+            margin-top: 0;
+            color: var(--color-bg-0);
+            font-size: 25px;
+        }
+        .form-button {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        form button {
+            background-color: var(--color-banner-text-2);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            margin-top: 0.8rem;
+            border-radius: 0.3rem;
+            color: var(--color-bg-1);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        p strong, .techHeading{
+            color: var(--color-bg-0);
+        }
+        .showAlltech{
+            margin-bottom: 1rem;
+        }
+        .techName{
+            background-color: var(--color-text);
+            color: var(--color-bg-0);
+            margin: 0 0.2rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .showSelected{
+            width: 100%;
+            background-color: transparent;
+            height: auto;
+            min-height: 2rem;
+            border: 1px solid var(--color-bg-0);
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            padding: 0.6rem 0.5rem 0 0.8rem;
+        }
+        .tech{
+            display: flex;
+            align-items: center;
+            padding: 0 0 0 0.5rem;
+            margin-top: -1rem;
+            color: #ddd
+        }
+        .techHeading{
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0;
+            margin-right: 0.5rem;
+        }
+        .technology{
+            font-size: 0.8rem;
+            margin: 0 0.2rem;
+        }
+        .add{
+            background-color: var(--color-special-text);
+            padding: 0.3rem 0.8rem;
+            border: none;
+            color: var(--color-bg-0);
+            border-radius: 0.3rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
     </style>
+    
