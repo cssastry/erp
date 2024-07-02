@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
                 data: leaves,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching leaves",
             });
@@ -35,7 +35,7 @@ const getById = async (req, res) => {
                 data: levesData,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching leaves",
             });
@@ -59,7 +59,7 @@ const add = async (req, res) => {
                 message: "leave added successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while adding leave",
             });
@@ -87,7 +87,7 @@ const update = async (req, res) => {
                 message: "Leave updated successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while updating leave",
             });
@@ -111,7 +111,7 @@ const deleteById = async (req, res) => {
                 message: "Leave deleted successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting the leave",
             });

@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
                 data: employes,
             })
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error in employes fetching",
             })
@@ -66,7 +66,7 @@ const add = async (req, res) => {
                     message: "Employ added successfully",
                 });
             } else {
-                res.status(500).send({
+                res.status(204).send({
                     success: false,
                     message: "Problem facing in adding employ",
                 });
@@ -100,7 +100,7 @@ const update = async (req, res) => {
                 message: "Employ data updated",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "problem facing in updating employ data",
             });
@@ -125,7 +125,7 @@ const getEmployById = async (req, res) => {
                 data: employ,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "problem faced during fetching employ data",
             });
@@ -149,7 +149,7 @@ const deleteById = async (req, res) => {
                 message: "Employ deleted successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting employ",
             });

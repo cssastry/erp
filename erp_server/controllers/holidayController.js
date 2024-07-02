@@ -17,7 +17,7 @@ const getAll = async (req, res) => {
             // If no holidays are found, send an error response
 
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching holidays",
             });
@@ -48,7 +48,7 @@ const add = async (req, res) => {
         } else {
             // If there is an error while adding the holiday, send an error response
 
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while adding holidays",
             });
@@ -85,7 +85,7 @@ const updateById = async (req, res) => {
         } else {
             // If there is an error while updating the holiday, send an error response
 
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while updating Holiday",
             });
@@ -115,7 +115,7 @@ const deleteById = async (req, res) => {
             });
         } else {
             // If there is an error while deleting the holiday, send an error response
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting the Holiday",
             });

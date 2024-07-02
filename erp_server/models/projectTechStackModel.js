@@ -8,14 +8,15 @@ function getCurrentIST() {
     return ISTTime;
 };
 
-const projectDetailsModel = new Schema({
+const projectTechStackModel = new Schema({
     projectId: {
         type: mongoose.Types.ObjectId,
-        ref: "projects"
+        ref: "projects",
     },
-    file: {
-        type: String
-    },
+    techStackId: {
+        type: mongoose.Types.ObjectId,
+        ref: "techstack"
+    }
 },
     {
         timestamps: {
@@ -23,4 +24,4 @@ const projectDetailsModel = new Schema({
         }
     });
 
-module.exports = mongoose.model("projectdetails", projectDetailsModel);
+module.exports = mongoose.model("projecttechstack", projectTechStackModel);

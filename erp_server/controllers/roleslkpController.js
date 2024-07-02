@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
                 data: roles,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching role's",
             });
@@ -35,7 +35,7 @@ const getRolesByDepId = async (req, res) => {
                 data: employ,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "problem faced during fetching role's",
             });
@@ -47,7 +47,8 @@ const getRolesByDepId = async (req, res) => {
             message: "Internal Server error",
         });
     };
-}; const add = async (req, res) => {
+};
+const add = async (req, res) => {
     try {
         let addData = await roleslkpRepo.add(req.body);
 
@@ -57,7 +58,7 @@ const getRolesByDepId = async (req, res) => {
                 message: "Role added successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while adding role",
             });
@@ -80,7 +81,7 @@ const updateById = async (req, res) => {
                 message: "Role updated successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while updating role",
             });
@@ -103,7 +104,7 @@ const deleteById = async (req, res) => {
                 message: "Role deleted successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting the role",
             });

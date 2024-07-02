@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
                 data: departments,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching department's",
             });
@@ -34,7 +34,7 @@ const add = async (req, res) => {
                 message: "Department's added successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while adding department's",
             });
@@ -57,7 +57,7 @@ const updateById = async (req, res) => {
                 message: "Department updated successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while updating department",
             });
@@ -80,7 +80,7 @@ const deleteById = async (req, res) => {
                 message: "Department deleted successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting the department",
             });

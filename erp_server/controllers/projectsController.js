@@ -34,7 +34,7 @@ const getAll = async (req, res) => {
                 data: projects,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching projects",
             });
@@ -50,14 +50,11 @@ const getAll = async (req, res) => {
 
 const add = async (req, res) => {
     const form = new formidable.IncomingForm();
-    const uploadDir = path.join(__dirname, '..', 'uploads'); // Set the upload directory
-    form.uploadDir = uploadDir; // Ensure this directory exists
-    form.keepExtensions = true; // Keep the file extensions
-
-    console.log("114: Incoming request for adding a project");
+    const uploadDir = path.join(__dirname, '..', 'uploads');
+    form.uploadDir = uploadDir;
+    form.keepExtensions = true;
 
     form.parse(req, (err, fields, files) => {
-        console.log("116: Parsing the form");
 
         if (err) {
             console.log('Error parsing the form:', err);
@@ -82,7 +79,6 @@ const add = async (req, res) => {
                     message: "Error saving the uploaded file",
                 });
             }
-
             // Ensure fields are properly cast to strings
             const incomingData = {
                 title: Array.isArray(fields.title) ? fields.title[0] : fields.title,
@@ -91,22 +87,16 @@ const add = async (req, res) => {
                 summary: Array.isArray(fields.summary) ? fields.summary[0] : fields.summary,
                 logo: newFilePath,
             };
-
-            console.log("132: Form data parsed successfully", incomingData);
-
             try {
-                console.log("134: Adding project to the repository");
                 let data = projectsRepo.add(incomingData);
                 if (data) {
-                    console.log("137: Project added successfully", data);
                     return res.status(200).send({
                         success: true,
                         message: "Project added successfully",
                         data: data,
                     });
                 } else {
-                    console.log("144: Error while adding project - repository returned no data");
-                    return res.status(500).send({
+                    return res.status(204).send({
                         success: false,
                         message: "Error while adding project",
                     });
@@ -163,7 +153,7 @@ const updateById = async (req, res) => {
                 message: "Project updated successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error in updating project",
             });
@@ -187,7 +177,7 @@ const deleteById = async (req, res) => {
                 message: "project deleted successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting project",
             });

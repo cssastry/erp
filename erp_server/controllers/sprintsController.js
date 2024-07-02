@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
                 data: sprints,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching sprint's",
             });
@@ -34,7 +34,7 @@ const add = async (req, res) => {
                 message: "sprint added successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while adding sprint",
             });
@@ -57,7 +57,7 @@ const updateById = async (req, res) => {
                 message: "Sprint updated successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while updating sprint",
             });
@@ -80,7 +80,7 @@ const deleteById = async (req, res) => {
                 message: "Sprint deleted successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while deleting the sprint",
             });

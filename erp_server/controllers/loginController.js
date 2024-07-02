@@ -1,5 +1,5 @@
 const employRepo = require("../repos/employesRepo");
-const hashing = require("../utils/hashing");
+// const hashing = require("../utils/hashing");
 
 const login = async (req, res) => {
     try {
@@ -21,7 +21,7 @@ const login = async (req, res) => {
                 });
             };
         } else {
-            res.status(200).send({
+            res.status(204).send({
                 success: false,
                 message: "Incorrect credentials",
             });

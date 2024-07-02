@@ -5,14 +5,14 @@ const getById = async (req, res) => {
     try {
         let id = req.params.id;
         let data = await payslipRepo.getById(id);
-        if(data){
+        if (data) {
             res.status(200).send({
                 success: true,
                 message: "Paysilps fetched successfully",
                 data,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching payslips",
             });
@@ -26,13 +26,13 @@ const getById = async (req, res) => {
     };
 }
 
-const add = async(req, res) => {
+const add = async (req, res) => {
     try {
         let id = req.params.id;
         let employDataArray = await employRepo.getById(id);
         let employData = employDataArray[0];
         let netPay = employData.netPay;
-        let {noOfWorkingDays, noOfDaysWorked} = req.body;
+        let { noOfWorkingDays, noOfDaysWorked } = req.body;
 
         let basicPay = 0.6 * netPay;
         let HRA = 0.4 * basicPay;
@@ -67,13 +67,13 @@ const add = async(req, res) => {
 
         let addData = await payslipRepo.add(data);
 
-        if(addData) {
+        if (addData) {
             res.status(200).send({
                 success: true,
                 message: "Payslip generated successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error in payslip generation",
             })

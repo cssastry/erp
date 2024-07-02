@@ -4,14 +4,14 @@ const getById = async (req, res) => {
     try {
         let id = req.params.id;
         let projects = await employProjectsRepo.getById;
-        if(projects){
+        if (projects) {
             res.status(200).send({
                 success: true,
                 message: "Employ projects fetched successfully",
                 data: projects,
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while fetching employ projects",
             });
@@ -28,13 +28,13 @@ const getById = async (req, res) => {
 const add = async (req, res) => {
     try {
         let data = await employProjectsRepo.add(req.body);
-        if(data){
+        if (data) {
             res.status(200).send({
                 success: true,
                 message: "Employs project added successfully",
             });
         } else {
-            res.status(500).send({
+            res.status(204).send({
                 success: false,
                 message: "Error while adding employs project",
             });
