@@ -76,10 +76,7 @@ const add = async (req, res) => {
 const update = async (req, res) => {
     try {
         let id = req.params.id;
-        console.log("_id: ", id);
-        console.log("req.body: ", req.body);
         let updateData = await leavesRepo.update(id, req.body);
-        console.log("updateData: ", updateData);
 
         if (updateData) {
             res.status(200).send({

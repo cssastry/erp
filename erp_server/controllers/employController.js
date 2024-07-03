@@ -29,24 +29,22 @@ const getAll = async (req, res) => {
 const add = async (req, res) => {
     try {
 
-        console.log(req.body);
+        let nextNumber;
         let exEmpId = await employesRepo.findEmpIdForHexa(req.body.employee);
-        console.log("exEmpId: ", exEmpId);
-        const ep0 = exEmpId[0].employeeId
-        const ep1 = ep0.slice(-3);
-        console.log("ep1: ", ep1);
-
-        const nextNumber = (parseInt(ep1, 10) + 1).toString().padStart(3, '0');
-        console.log("nextNumber: ", nextNumber);
+        if (exEmpId.length != 0) {
+            const ep0 = exEmpId[0].employeeId
+            const ep1 = ep0.slice(-3);
+            nextNumber = (parseInt(ep1, 10) + 1).toString().padStart(3, '0');
+        } else {
+            nextNumber = '001';
+        }
         const currentYear = new Date().getFullYear().toString().slice(-2);
-
-
         // let newHexEmployeeId = employeeHexHandler.trimHexVal(exEmpId);
         // console.log("newHexEmployeeId: ", newHexEmployeeId);
         // let hashedpassword = await hashing.passwordHashing(req.body.password);
         // console.log("hashedPassword: ", hashedpassword);
         // req.body.password = hashedpassword;
-        const empdata = {
+        let empdata = {
             email: req.body.email,
             password: req.body.password,
             employeeId: `SM${currentYear}${nextNumber}`
@@ -55,29 +53,29 @@ const add = async (req, res) => {
         if (employExists.length > 0) {
             res.status(400).send({
                 success: false,
-                message: "Employ email already exists",
+                message: "Employ email already exists :(",
             });
         } else {
-
             let employ = await employesRepo.add(empdata);
             if (employ) {
                 res.status(200).send({
                     success: true,
-                    message: "Employ added successfully",
+                    message: "Employ added successfully :)",
                 });
             } else {
                 res.status(204).send({
                     success: false,
-                    message: "Problem facing in adding employ",
+                    message: "Problem facing in adding employ ;(",
                 });
             };
         }
+
 
     } catch (error) {
         console.log(error);
         res.status(500).send({
             success: false,
-            message: "Internal Server error",
+            message: "Internal Server error ^_^",
         });
     };
 };
@@ -90,10 +88,7 @@ const update = async (req, res) => {
             let hashedPassword = await hashing.passwordHashing(updateData.password);
             updateData.password = hashedPassword;
         };
-        console.log(updateData);
-        console.log(id)
         let result = await employesRepo.updateById(id, updateData);
-        console.log(result);
         if (result) {
             res.status(200).send({
                 success: true,

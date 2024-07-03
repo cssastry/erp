@@ -28,7 +28,6 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
     try {
         let id = req.params.id;
-        console.log(id)
         let projectTechStack = await projectTechStackRepo.getById(id);
         if (projectTechStack) {
             res.status(200).send({
@@ -53,7 +52,6 @@ const getById = async (req, res) => {
 
 const add = async (req, res) => {
     try {
-        console.log(req.body)
         let addData = await projectTechStackRepo.add(req.body);
 
         if (addData) {

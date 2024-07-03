@@ -3,7 +3,6 @@ const employRepo = require("../repos/employesRepo");
 
 const login = async (req, res) => {
     try {
-        console.log("req.body: ", req.body);
         let { email, password } = req.body;
         let employData = await employRepo.getById(email);
         if (employData.length > 0) {

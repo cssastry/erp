@@ -69,12 +69,9 @@ const updateById = async (req, res) => {
 
     try {
         let id = req.params.id;
-        console.log("_id: ", id);
-        console.log("req.body: ", req.body);
         // Update the holiday using the repository
 
         let updateData = await holidayRepo.update(id, req.body);
-        console.log("updateData: ", updateData);
         // If the holiday is updated successfully, send a success response
 
         if (updateData) {
