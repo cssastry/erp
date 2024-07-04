@@ -8,6 +8,8 @@
     import { getAll, add } from "../../../api_calls/projects_api";
     import { getprojectTechStackById, addprojectTechStack, deleteByIdprojectTechStack } from "../../../api_calls/projectTechStack_api";
     import { getAllTechStack } from "../../../api_calls/techStack_api";
+    import addIcon from "$lib/images/icons/add.svg";
+    import { getprojectDetailsById, addprojectDetails, deleteByIdprojectDetails } from "../../../api_calls/projectDetails_api";
     
     let projects = [];
     const showpopup = writable({ visible: false });
@@ -15,6 +17,8 @@
     let projectTechStack = [];
     let allTechStack = [];
     let techstackClicked = false;
+    let projectDocuments = [];
+    let addDocumentPopup = false;
     
     onMount(async () => {
         let data = await getAll();
@@ -23,6 +27,10 @@
     
     function togglepopup() {
         showpopup.update(popup => ({ ...popup, visible: !popup.visible }));
+    }
+
+    const handleAddDocumentPopup = () => {
+        addDocumentPopup = !addDocumentPopup;
     }
     
     const handleaddtechstackButton = () => {
@@ -36,6 +44,8 @@
         let techData = await getAllTechStack();
         allTechStack = techData.data;
         allTechStack = allTechStack.filter(tech => !projectTechStack.find(etech => etech.techStackId._id === tech._id));
+        let documents = await getprojectDetailsById(project._id);
+        projectDocuments = documents.data;
         showpopup.set({ visible: true });
     }
     
@@ -78,6 +88,40 @@
         let response = await deleteByIdprojectTechStack(techId);
         console.log(response.data);
     }
+
+    const handleDocumentSubmit = async (event) => {
+        event.preventDefault();
+        let title = event.target.title.value;
+        let file = event.target.projectFile.files[0];
+
+        var formData = new FormData();
+        formData.append("title", title);
+        formData.append("projectFile", file);
+        formData.append("projectId", $selectedProject._id);
+        console.log(formData);
+
+        let response = await addprojectDetails(formData);
+        if (response.success) {
+            message.success(response.message);
+            let documents = await getprojectDetailsById($selectedProject._id);
+            projectDocuments = documents.data;
+            addDocumentPopup = false;
+        } else {
+            message.error(response.message);
+        }
+    };
+
+    const deleteProjectDocument = async (documentId) => {
+        let response = await  deleteByIdprojectDetails(documentId);
+        if (response.success){
+            message.success(response.message);
+            let documents = await getprojectDetailsById($selectedProject._id);
+            projectDocuments = documents.data;
+        } else {
+            message.error(response.message);
+        }
+    }
+    
     </script>
     
     <!-- svelte-ignore missing-declaration -->
@@ -91,7 +135,7 @@
         {#if $showpopup.visible && !$selectedProject}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div class="popup-overlay" on:click={() => showpopup.set({ visible: false })}>
+            <div class="popup-overlay" on:click={() => {showpopup.set({ visible: false }); selectedProject.set(null)}}>
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <div class="popup" on:click={(e) => e.stopPropagation()}>
@@ -114,11 +158,11 @@
         {#if $showpopup.visible && $selectedProject}
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="popup-overlay" on:click={() => showpopup.set({ visible: false })}>
+            <div class="popup-overlay" on:click={() => {showpopup.set({ visible: false }); selectedProject.set(null)}}>
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="popup" on:click={(e) => e.stopPropagation()}>
                     <div class="form-button">
-                        <button on:click={() => showpopup.set({ visible: false })}>X</button>
+                        <button on:click={() => {showpopup.set({ visible: false }); selectedProject.set(null)}}>X</button>
                     </div>
                     <h2>Project Details</h2>
                     <div class="details">
@@ -171,6 +215,38 @@
                                 </div>
                             {/if}
                             <button class="add" on:click={() => handleaddtechstackButton()}>{techstackClicked ? "Save" : "Add Techstack"}</button>
+                        {/if}
+                    </div>
+                    <div class="documents">
+                        <div class="head">
+                            <h2>{addDocumentPopup ? "Add project documents" :"Project Documents"}</h2>
+                            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                            {#if !addDocumentPopup}
+                                <img src={addIcon} alt="icon" width="25rem" on:click={() => handleAddDocumentPopup()}>
+                            {/if}
+                        </div>
+                        {#if addDocumentPopup}
+                            <div class="addForm">
+                                <form on:submit={handleDocumentSubmit}>
+                                    <input type="text" name="title" placeholder="Document Title" required>
+                                    <input type="file" name="projectFile" accept="*/*" required>
+                                    <div class="form-button">
+                                        <button type="submit">Upload Document</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {/if}
+                        {#if !addDocumentPopup}
+                            <Grid container gutter={15}>
+                                {#each projectDocuments as document}
+                                    <Grid xs={3} md={3} lg={3}>
+                                        <div class="documentTab">
+                                            <p class="documentName">{document.title}</p>
+                                            <span on:click={() => deleteProjectDocument(document._id)}>X</span>
+                                        </div>
+                                    </Grid>
+                                {/each}
+                            </Grid>
                         {/if}
                     </div>
                 </div>
@@ -264,6 +340,7 @@
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             cursor: pointer;
+            min-height: 8rem;
         }
         .leaves-head{
             margin-bottom: 0.5rem;
@@ -387,6 +464,27 @@
             border-radius: 0.3rem;
             cursor: pointer;
             margin-top: 1rem;
+        }
+        .documents{
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .documentTab{
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--side-nav-color);
+            border-radius: 1rem;
+            color: var(--color-bg-0);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .documentTab span{
+            background-color: var(--color-special-text);
+            font-size: 0.8rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 2rem;
+            cursor: pointer;
         }
     </style>
     
