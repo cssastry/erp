@@ -13,6 +13,9 @@ const projectDetailsModel = new Schema({
         type: mongoose.Types.ObjectId,
         ref: "projects"
     },
+    title: {
+        type: String,
+    },
     file: {
         type: String
     },

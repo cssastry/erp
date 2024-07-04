@@ -3,166 +3,90 @@ const path = require('path');
 const fs = require('fs');
 const formidable = require("formidable");
 const uploadDir = path.join(__dirname, '..', 'uploads');
+const fileuploader = require('../utils/fileUploader');
+const { getImageBase64 } = require("../utils/fileToBase64Converter");
 
 
 
-// const getAll = async (req, res) => {
-//     try {
-//         let newProjectDetails = await projectDetailsRepo.getAll();
-//         if (newProjectDetails) {
-//             res.status(200).send({
-//                 success: true,
-//                 message: "Project's fetched successfully",
-//                 data: newProjectDetails,
-//             });
-//         } else {
-//             res.status(204).send({
-//                 success: false,
-//                 message: "Error while fetching project's",
-//             });
-//         };
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).send({
-//             success: false,
-//             message: "Internal Server error",
-//         });
-//     };
-// };
-
-// const add = async (req, res) => {
-//     try {
-//         let addData = await projectDetailsRepo.add(req.body);
-
-//         if (addData) {
-//             res.status(200).send({
-//                 success: true,
-//                 message: "Department's added successfully",
-//             });
-//         } else {
-//             res.status(204).send({
-//                 success: false,
-//                 message: "Error while adding department's",
-//             });
-//         };
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).send({
-//             success: false,
-//             message: "Internal server error",
-//         });
-//     };
-// };
-
-const getAll = async (req, res) => {
-    try {
-        let newProjectDetails = await projectDetailsRepo.getAll();
-        if (newProjectDetails) {
-            // Modify each project detail to include the full URL to the file
-            newProjectDetails = newProjectDetails.map(projectDetail => {
-                if (projectDetail.file) {
-                    projectDetail.file = `${req.protocol}://${req.get('host')}${projectDetail.file}`;
-                }
-                return projectDetail;
-            });
-
-            res.status(200).send({
-                success: true,
-                message: "Projects fetched successfully",
-                data: newProjectDetails,
-            });
-        } else {
-            res.status(204).send({
-                success: false,
-                message: "No projects found",
-            });
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success: false,
-            message: "Internal Server error",
-        });
-    }
-};
-
-const add = () => {
-    const form = new formidable.IncomingForm();
-    form.uploadDir = uploadDir;
-    form.keepExtensions = true;
-    form.parse(req, (err, fields, files) => {
-        if (err) {
-            console.log('Error parsing the form:', err);
-            return res.status(500).send({
-                success: false,
-                message: "Error parsing the form",
-            });
-        }
-        const projectDocument = files.projectFile[0];
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const sanitizedFilename = projectDocument.originalFilename.replace(/\s+/g, '-');
-        const newFilePath = path.join(uploadDir, `${uniqueSuffix} - ${sanitizedFilename}`);
-        fs.rename(projectDocument.filepath, newFilePath, (err) => {
-            if (err) {
-                console.log('Error moving the file:', err);
-                return res.status(500).send({
-                    success: false,
-                    message: "Error saving the uploaded file",
-                });
-            }
-            // Ensure fields are properly cast to strings
-            const incomingData = {
-                id: Array.isArray(fields.projectId) ? fields.projectId[0] : fields.projectId,
-                projectFile: newFilePath,
-            };
-            try {
-                let data = projectDetailsRepo.add(incomingData);
-                if (data) {
-                    return res.status(200).send({
-                        success: true,
-                        message: "Project file added successfully",
-                        data: data,
-                    });
-                } else {
-                    return res.status(204).send({
-                        success: false,
-                        message: "Error while adding project file",
-                    });
-                }
-            } catch (error) {
-                console.log("Exception caught while adding project file:", error);
-                return res.status(500).send({
-                    success: false,
-                    message: "Internal server error",
-                });
-            }
-        });
-    })
-}
-
-const updateById = async (req, res) => {
+const getById = async (req, res) => {
     try {
         let id = req.params.id;
-        let updateData = await projectDetailsRepo.update(id, req.body);
-        if (updateData) {
+        let projectDetails = await projectDetailsRepo.getById(id);
+
+        if (projectDetails && projectDetails.length > 0) {
+            for (let projectDetail of projectDetails) {
+                if (projectDetail.file) {
+                    const filePathName = path.basename(projectDetail.file);
+                    const filePath = path.join(uploadDir, filePathName);
+                    if (fs.existsSync(filePath)) {
+                        projectDetail.file = await getImageBase64(filePath);
+                    } else {
+                        console.log(`Current directory contents:`);
+                        try {
+                            const files = await fs.promises.readdir(uploadDir);
+                            console.log(files);
+                        } catch (error) {
+                            console.error(`Error reading directory: ${error}`);
+                        }
+                    }
+                }
+            }
             res.status(200).send({
                 success: true,
-                message: "Department updated successfully",
+                message: "project details fetched successfully",
+                data: projectDetails,
             });
         } else {
             res.status(204).send({
                 success: false,
-                message: "Error while updating department",
+                message: "Error while fetching project details",
             });
-        };
+        }
     } catch (error) {
         console.log(error);
         res.status(500).send({
             success: false,
-            message: "Internal Server error",
+            message: "Internal server error",
         });
-    };
-};
+    }
+}
+
+
+const add = async (req, res) => {
+    const form = new formidable.IncomingForm();
+    const uploadDir = path.join(__dirname, '..', 'uploads');
+    form.uploadDir = uploadDir;
+    form.keepExtensions = true;
+
+    form.parse(req, async (err, fields, files) => {
+        try {
+            const incomingData = await fileuploader.addfile(err, fields, files);
+            console.log("incomingData: ", incomingData);
+
+            let data = await projectDetailsRepo.add(incomingData);
+            if (data) {
+                return res.status(200).send({
+                    success: true,
+                    message: "Project file added successfully",
+                    data: data,
+                });
+            } else {
+                return res.status(204).send({
+                    success: false,
+                    message: "Error while adding project file",
+                });
+            }
+        } catch (error) {
+            console.log("Exception caught while adding project file:", error);
+            return res.status(500).send({
+                success: false,
+                message: "Internal server error",
+            });
+        }
+    });
+}
+
+
 const deleteById = async (req, res) => {
     try {
         let id = req.params.id;
@@ -188,8 +112,7 @@ const deleteById = async (req, res) => {
 };
 
 module.exports = {
-    getAll,
+    getById,
     add,
-    updateById,
     deleteById,
 }

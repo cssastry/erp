@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const formidable = require("formidable");
-const { getImageBase64 } = require("../utils/base64imageconverter");
+const { getImageBase64 } = require("../utils/fileToBase64Converter");
 const projectsRepo = require("../repos/projectsRepo");
 const uploadDir = path.join(__dirname, '..', 'uploads');
 
@@ -55,7 +55,6 @@ const add = async (req, res) => {
     form.keepExtensions = true;
 
     form.parse(req, (err, fields, files) => {
-
         if (err) {
             console.log('Error parsing the form:', err);
             return res.status(500).send({
