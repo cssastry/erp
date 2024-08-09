@@ -46,6 +46,7 @@
         allTechStack = allTechStack.filter(tech => !projectTechStack.find(etech => etech.techStackId._id === tech._id));
         let documents = await getprojectDetailsById(project._id);
         projectDocuments = documents.data;
+        console.log("projectDocuments: ", projectDocuments)
         showpopup.set({ visible: true });
     }
     
@@ -121,6 +122,37 @@
             message.error(response.message);
         }
     }
+
+    const openDocument = (base64String, mimeType) => {
+        if (!base64String) {
+            console.error("No base64 string provided");
+            return;
+        }
+
+        if (!mimeType) {
+            console.error("MIME type is required for plain base64 strings");
+            return;
+        }
+
+        // Decode the Base64 string
+        const byteCharacters = atob(base64String);
+
+        // Create a byte array from the decoded string
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+
+        // Create a blob from the byte array
+        const blob = new Blob([byteArray], { type: mimeType });
+
+        // Create a URL for the blob and open it in a new tab
+        const blobUrl = URL.createObjectURL(blob);
+        const newTab = window.open();
+        newTab.document.write(`<iframe src="${blobUrl}" width="100%" height="100%"></iframe>`);
+    };
+
     
     </script>
     
@@ -219,7 +251,7 @@
                     </div>
                     <div class="documents">
                         <div class="head">
-                            <h2>{addDocumentPopup ? "Add project documents" :"Project Documents"}</h2>
+                            <h2>{addDocumentPopup ? "Add project document`s" :"Project Documents"}</h2>
                             <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                             {#if !addDocumentPopup}
                                 <img src={addIcon} alt="icon" width="25rem" on:click={() => handleAddDocumentPopup()}>
@@ -237,16 +269,22 @@
                             </div>
                         {/if}
                         {#if !addDocumentPopup}
-                            <Grid container gutter={15}>
-                                {#each projectDocuments as document}
-                                    <Grid xs={3} md={3} lg={3}>
-                                        <div class="documentTab">
-                                            <p class="documentName">{document.title}</p>
-                                            <span on:click={() => deleteProjectDocument(document._id)}>X</span>
-                                        </div>
-                                    </Grid>
-                                {/each}
-                            </Grid>
+                            {#if projectDocuments}
+                                <Grid container gutter={15}>
+                                    <!-- {#if projectDocuments.length > 0} -->
+                                        {#each projectDocuments as document}
+                                            <Grid xs={3} md={3} lg={3}>
+                                                <div class="documentTab" on:click={() => openDocument(document.file, "application/pdf")}>
+                                                    <p class="documentName">{document.title}</p>
+                                                    <span on:click={() => deleteProjectDocument(document._id)}>X</span>
+                                                </div>
+                                            </Grid>
+                                        {/each}
+                                    <!-- {/if} -->
+                                </Grid>
+                            {:else}
+                                <p>No documents uploaded</p>
+                            {/if}
                         {/if}
                     </div>
                 </div>
@@ -314,6 +352,11 @@
         .head{
             display: flex;
             justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .head h2{
+            margin: 0;
+            padding: 0;
         }
         .buttons{
             display: flex;

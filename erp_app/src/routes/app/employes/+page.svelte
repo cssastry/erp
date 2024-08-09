@@ -45,7 +45,6 @@
         selectedEmployee = employee;
         let data = await getEmployeeTechStackById(selectedEmployee.employeeId);
         employeeTechstack = data.data;
-        alert(employeeTechstack)
         let techData = await getAllTechStack();
         techStack = techData.data;
         techStack = techStack.filter(tech => !employeeTechstack.find(etech => etech.techStackId._id === tech._id));

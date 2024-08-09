@@ -285,7 +285,7 @@
                             <img src={addIcon} alt="icon" on:click={() => togglePopup(1)}>
                         </div>
                         <!-- svelte-ignore a11y-no-static-element-interactions -->
-                        {#if progressTasks.lenght > 1}
+                        {#if progressTasks.length > 0}
                             {#each progressTasks as task}
                             <!-- svelte-ignore a11y-click-events-have-key-events -->
                             <div class="data" on:click={() => {handleTaskClick(task)}}>
@@ -307,7 +307,7 @@
                             <p>Done</p>
                         </div>
                         <!-- svelte-ignore a11y-no-static-element-interactions -->
-                        {#if doneTasks.length > 1}
+                        {#if doneTasks.length > 0}
                             {#each doneTasks as task}
                                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                                 <div class="data" on:click={() => {handleTaskClick(task)}}>
