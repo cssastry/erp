@@ -2,7 +2,6 @@
 	import Grid from "svelte-grid-responsive";
 	import banner from "$lib/images/hero 1home.png";
 	import VerticalSpacer from "../../components/generic/VerticalSpacer.svelte";
-	import svelteImage from "$lib/images/image 2svelte.svg";
 	import TechStack from "../../components/generic/clients.svelte";
 	import jagbandhu from '$lib/images/clients/jagnabdhu.png';
 	import nehwe from '$lib/images/clients/nehwe.png';

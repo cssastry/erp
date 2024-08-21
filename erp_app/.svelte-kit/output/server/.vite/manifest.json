@@ -1,0 +1,997 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "imports": [
+      "_internal.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/server/internal.js"
+  },
+  "Grid.css": {
+    "file": "_app/immutable/assets/Grid.8c88aa22.css",
+    "src": "Grid.css"
+  },
+  "VerticalSpacer.css": {
+    "file": "_app/immutable/assets/VerticalSpacer.f4b01684.css",
+    "src": "VerticalSpacer.css"
+  },
+  "_1.js": {
+    "assets": [
+      "_app/immutable/assets/1.d7a92cde.jpg"
+    ],
+    "file": "chunks/1.js"
+  },
+  "_Grid.js": {
+    "css": [
+      "_app/immutable/assets/Grid.8c88aa22.css"
+    ],
+    "file": "chunks/Grid.js",
+    "imports": [
+      "_ssr.js",
+      "_index.js"
+    ]
+  },
+  "_VerticalSpacer.js": {
+    "css": [
+      "_app/immutable/assets/VerticalSpacer.f4b01684.css"
+    ],
+    "file": "chunks/VerticalSpacer.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_about us image.js": {
+    "assets": [
+      "_app/immutable/assets/about us image.90497bc9.jpg"
+    ],
+    "file": "chunks/about us image.js"
+  },
+  "_add.js": {
+    "assets": [
+      "_app/immutable/assets/add.4dd35d6d.svg"
+    ],
+    "file": "chunks/add.js"
+  },
+  "_calender.js": {
+    "assets": [
+      "_app/immutable/assets/calender.3ef12508.svg"
+    ],
+    "file": "chunks/calender.js"
+  },
+  "_index.js": {
+    "file": "chunks/index.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_location.js": {
+    "assets": [
+      "_app/immutable/assets/contact 2.56d6cc8f.png",
+      "_app/immutable/assets/location.daa397f7.svg"
+    ],
+    "file": "chunks/location.js"
+  },
+  "_logoS_M.js": {
+    "assets": [
+      "_app/immutable/assets/logoS_M.b9d7d839.svg"
+    ],
+    "file": "chunks/logoS_M.js"
+  },
+  "_mail.js": {
+    "assets": [
+      "_app/immutable/assets/mail.8ee9bca4.svg"
+    ],
+    "file": "chunks/mail.js"
+  },
+  "_menu.js": {
+    "assets": [
+      "_app/immutable/assets/menu.6c6d4aa1.svg"
+    ],
+    "file": "chunks/menu.js"
+  },
+  "_nehwe.js": {
+    "assets": [
+      "_app/immutable/assets/jagnabdhu.5008a078.png",
+      "_app/immutable/assets/nehwe.3dbee826.png"
+    ],
+    "file": "chunks/nehwe.js"
+  },
+  "_phone.js": {
+    "assets": [
+      "_app/immutable/assets/phone.7fc85f2e.svg"
+    ],
+    "file": "chunks/phone.js"
+  },
+  "_prod-ssr.js": {
+    "file": "chunks/prod-ssr.js"
+  },
+  "_profile.js": {
+    "assets": [
+      "_app/immutable/assets/profile.0163ca9b.svg"
+    ],
+    "file": "chunks/profile.js"
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js"
+  },
+  "_stores.js": {
+    "file": "chunks/stores.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-all-400-normal.woff": {
+    "file": "_app/immutable/assets/fira-mono-all-400-normal.1e3b098c.woff",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-all-400-normal.woff"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-cyrillic-400-normal.c7d433fd.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-cyrillic-ext-400-normal.3df7909e.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-cyrillic-ext-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-greek-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-greek-400-normal.a8be01ce.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-greek-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-greek-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-greek-ext-400-normal.9e2fe623.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-greek-ext-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-latin-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-latin-400-normal.e43b3538.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-latin-400-normal.woff2"
+  },
+  "node_modules/@fontsource/fira-mono/files/fira-mono-latin-ext-400-normal.woff2": {
+    "file": "_app/immutable/assets/fira-mono-latin-ext-400-normal.6bfabd30.woff2",
+    "src": "node_modules/@fontsource/fira-mono/files/fira-mono-latin-ext-400-normal.woff2"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/layout.svelte": {
+    "file": "entries/fallbacks/layout.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/layout.svelte"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "imports": [
+      "_prod-ssr.js",
+      "_internal.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js"
+  },
+  "src/lib/employes/1.jpg": {
+    "file": "_app/immutable/assets/1.d7a92cde.jpg",
+    "src": "src/lib/employes/1.jpg"
+  },
+  "src/lib/employes/2.jpg": {
+    "file": "_app/immutable/assets/2.477a05ab.jpg",
+    "src": "src/lib/employes/2.jpg"
+  },
+  "src/lib/employes/3.jpg": {
+    "file": "_app/immutable/assets/3.1376b143.jpg",
+    "src": "src/lib/employes/3.jpg"
+  },
+  "src/lib/employes/4.jpg": {
+    "file": "_app/immutable/assets/4.0d42a67e.jpg",
+    "src": "src/lib/employes/4.jpg"
+  },
+  "src/lib/employes/5.jpg": {
+    "file": "_app/immutable/assets/5.92431bcb.jpg",
+    "src": "src/lib/employes/5.jpg"
+  },
+  "src/lib/images/about us image.jpg": {
+    "file": "_app/immutable/assets/about us image.90497bc9.jpg",
+    "src": "src/lib/images/about us image.jpg"
+  },
+  "src/lib/images/aboutSec1.png": {
+    "file": "_app/immutable/assets/aboutSec1.2aa8a989.png",
+    "src": "src/lib/images/aboutSec1.png"
+  },
+  "src/lib/images/clients/cms.png": {
+    "file": "_app/immutable/assets/cms.5fb49ab4.png",
+    "src": "src/lib/images/clients/cms.png"
+  },
+  "src/lib/images/clients/erp.png": {
+    "file": "_app/immutable/assets/erp.a0b9dc0b.png",
+    "src": "src/lib/images/clients/erp.png"
+  },
+  "src/lib/images/clients/go scholarly.png": {
+    "file": "_app/immutable/assets/go scholarly.c8d9e5d8.png",
+    "src": "src/lib/images/clients/go scholarly.png"
+  },
+  "src/lib/images/clients/jagnabdhu.png": {
+    "file": "_app/immutable/assets/jagnabdhu.5008a078.png",
+    "src": "src/lib/images/clients/jagnabdhu.png"
+  },
+  "src/lib/images/clients/nehwe.png": {
+    "file": "_app/immutable/assets/nehwe.3dbee826.png",
+    "src": "src/lib/images/clients/nehwe.png"
+  },
+  "src/lib/images/clients/srisriholistick.png": {
+    "file": "_app/immutable/assets/srisriholistick.64353600.png",
+    "src": "src/lib/images/clients/srisriholistick.png"
+  },
+  "src/lib/images/clients/stupicks.png": {
+    "file": "_app/immutable/assets/stupicks.b731c295.png",
+    "src": "src/lib/images/clients/stupicks.png"
+  },
+  "src/lib/images/contact 2.png": {
+    "file": "_app/immutable/assets/contact 2.56d6cc8f.png",
+    "src": "src/lib/images/contact 2.png"
+  },
+  "src/lib/images/employeeProfilePhoto.png": {
+    "file": "_app/immutable/assets/employeeProfilePhoto.94cf4e3b.png",
+    "src": "src/lib/images/employeeProfilePhoto.png"
+  },
+  "src/lib/images/hero 1home.png": {
+    "file": "_app/immutable/assets/hero 1home.ec8f6878.png",
+    "src": "src/lib/images/hero 1home.png"
+  },
+  "src/lib/images/icons/add.svg": {
+    "file": "_app/immutable/assets/add.4dd35d6d.svg",
+    "src": "src/lib/images/icons/add.svg"
+  },
+  "src/lib/images/icons/addFill.svg": {
+    "file": "_app/immutable/assets/addFill.0f0cc2eb.svg",
+    "src": "src/lib/images/icons/addFill.svg"
+  },
+  "src/lib/images/icons/behance.svg": {
+    "file": "_app/immutable/assets/behance.9e240b26.svg",
+    "src": "src/lib/images/icons/behance.svg"
+  },
+  "src/lib/images/icons/calender.svg": {
+    "file": "_app/immutable/assets/calender.3ef12508.svg",
+    "src": "src/lib/images/icons/calender.svg"
+  },
+  "src/lib/images/icons/call.svg": {
+    "file": "_app/immutable/assets/call.35d9cb46.svg",
+    "src": "src/lib/images/icons/call.svg"
+  },
+  "src/lib/images/icons/channel.svg": {
+    "file": "_app/immutable/assets/channel.f120af62.svg",
+    "src": "src/lib/images/icons/channel.svg"
+  },
+  "src/lib/images/icons/dm.svg": {
+    "file": "_app/immutable/assets/dm.e04355f7.svg",
+    "src": "src/lib/images/icons/dm.svg"
+  },
+  "src/lib/images/icons/github.svg": {
+    "file": "_app/immutable/assets/github.8e23cdac.svg",
+    "src": "src/lib/images/icons/github.svg"
+  },
+  "src/lib/images/icons/linkedin.svg": {
+    "file": "_app/immutable/assets/linkedin.5ce646b0.svg",
+    "src": "src/lib/images/icons/linkedin.svg"
+  },
+  "src/lib/images/icons/location.svg": {
+    "file": "_app/immutable/assets/location.daa397f7.svg",
+    "src": "src/lib/images/icons/location.svg"
+  },
+  "src/lib/images/icons/login.svg": {
+    "file": "_app/immutable/assets/login.12981877.svg",
+    "src": "src/lib/images/icons/login.svg"
+  },
+  "src/lib/images/icons/mail.svg": {
+    "file": "_app/immutable/assets/mail.8ee9bca4.svg",
+    "src": "src/lib/images/icons/mail.svg"
+  },
+  "src/lib/images/icons/menu.svg": {
+    "file": "_app/immutable/assets/menu.6c6d4aa1.svg",
+    "src": "src/lib/images/icons/menu.svg"
+  },
+  "src/lib/images/icons/notification.svg": {
+    "file": "_app/immutable/assets/notification.14e35efc.svg",
+    "src": "src/lib/images/icons/notification.svg"
+  },
+  "src/lib/images/icons/person.svg": {
+    "file": "_app/immutable/assets/person.f52f8826.svg",
+    "src": "src/lib/images/icons/person.svg"
+  },
+  "src/lib/images/icons/phone.svg": {
+    "file": "_app/immutable/assets/phone.7fc85f2e.svg",
+    "src": "src/lib/images/icons/phone.svg"
+  },
+  "src/lib/images/icons/profile.svg": {
+    "file": "_app/immutable/assets/profile.0163ca9b.svg",
+    "src": "src/lib/images/icons/profile.svg"
+  },
+  "src/lib/images/icons/send.svg": {
+    "file": "_app/immutable/assets/send.dccd0b87.svg",
+    "src": "src/lib/images/icons/send.svg"
+  },
+  "src/lib/images/icons/sideNav/approvals.svg": {
+    "file": "_app/immutable/assets/approvals.42531afe.svg",
+    "src": "src/lib/images/icons/sideNav/approvals.svg"
+  },
+  "src/lib/images/icons/sideNav/chat.svg": {
+    "file": "_app/immutable/assets/chat.817c838f.svg",
+    "src": "src/lib/images/icons/sideNav/chat.svg"
+  },
+  "src/lib/images/icons/sideNav/dashboard.svg": {
+    "file": "_app/immutable/assets/dashboard.e4c0c347.svg",
+    "src": "src/lib/images/icons/sideNav/dashboard.svg"
+  },
+  "src/lib/images/icons/sideNav/leaves.svg": {
+    "file": "_app/immutable/assets/leaves.1434290e.svg",
+    "src": "src/lib/images/icons/sideNav/leaves.svg"
+  },
+  "src/lib/images/icons/sideNav/payslip.svg": {
+    "file": "_app/immutable/assets/payslip.2ded8e0f.svg",
+    "src": "src/lib/images/icons/sideNav/payslip.svg"
+  },
+  "src/lib/images/icons/sideNav/tasks.svg": {
+    "file": "_app/immutable/assets/tasks.5d87bc3e.svg",
+    "src": "src/lib/images/icons/sideNav/tasks.svg"
+  },
+  "src/lib/images/icons/sideNav/team.svg": {
+    "file": "_app/immutable/assets/team.be24b5c4.svg",
+    "src": "src/lib/images/icons/sideNav/team.svg"
+  },
+  "src/lib/images/icons/sideNav/tickets.svg": {
+    "file": "_app/immutable/assets/tickets.fb631e5c.svg",
+    "src": "src/lib/images/icons/sideNav/tickets.svg"
+  },
+  "src/lib/images/icons/sideNav/viewcalender.svg": {
+    "file": "_app/immutable/assets/viewcalender.43cb5022.svg",
+    "src": "src/lib/images/icons/sideNav/viewcalender.svg"
+  },
+  "src/lib/images/icons/video.svg": {
+    "file": "_app/immutable/assets/video.4b9724ea.svg",
+    "src": "src/lib/images/icons/video.svg"
+  },
+  "src/lib/images/icons/wave.svg": {
+    "file": "_app/immutable/assets/wave.a5f1fc90.svg",
+    "src": "src/lib/images/icons/wave.svg"
+  },
+  "src/lib/images/login.png": {
+    "file": "_app/immutable/assets/login.f40c5b0d.png",
+    "src": "src/lib/images/login.png"
+  },
+  "src/lib/images/logoS&M.svg": {
+    "file": "_app/immutable/assets/logoS_M.b9d7d839.svg",
+    "src": "src/lib/images/logoS&M.svg"
+  },
+  "src/lib/images/services/IoTSolutions.png": {
+    "file": "_app/immutable/assets/IoTSolutions.e2635efc.png",
+    "src": "src/lib/images/services/IoTSolutions.png"
+  },
+  "src/lib/images/services/icon1.svg": {
+    "file": "_app/immutable/assets/icon1.c982e863.svg",
+    "src": "src/lib/images/services/icon1.svg"
+  },
+  "src/lib/images/services/icon2.svg": {
+    "file": "_app/immutable/assets/icon2.b580af2e.svg",
+    "src": "src/lib/images/services/icon2.svg"
+  },
+  "src/lib/images/services/icon3.svg": {
+    "file": "_app/immutable/assets/icon3.7aeae243.svg",
+    "src": "src/lib/images/services/icon3.svg"
+  },
+  "src/lib/images/services/icon4.svg": {
+    "file": "_app/immutable/assets/icon4.ff5c4500.svg",
+    "src": "src/lib/images/services/icon4.svg"
+  },
+  "src/lib/images/services/mobileappdevelopment.png": {
+    "file": "_app/immutable/assets/mobileappdevelopment.a2150c83.png",
+    "src": "src/lib/images/services/mobileappdevelopment.png"
+  },
+  "src/lib/images/services/supportandMaintanance.png": {
+    "file": "_app/immutable/assets/supportandMaintanance.1d53b5cc.png",
+    "src": "src/lib/images/services/supportandMaintanance.png"
+  },
+  "src/lib/images/services/webDevelopment.png": {
+    "file": "_app/immutable/assets/webDevelopment.9cba338d.png",
+    "src": "src/lib/images/services/webDevelopment.png"
+  },
+  "src/lib/images/services/webHosting.png": {
+    "file": "_app/immutable/assets/webHosting.e9d3814d.png",
+    "src": "src/lib/images/services/webHosting.png"
+  },
+  "src/lib/images/techImage.png": {
+    "file": "_app/immutable/assets/techImage.1e264acb.png",
+    "src": "src/lib/images/techImage.png"
+  },
+  "src/lib/images/workSection/brainstroming.png": {
+    "file": "_app/immutable/assets/brainstroming.e792c051.png",
+    "src": "src/lib/images/workSection/brainstroming.png"
+  },
+  "src/lib/images/workSection/meeting.png": {
+    "file": "_app/immutable/assets/meeting.ea670d2e.png",
+    "src": "src/lib/images/workSection/meeting.png"
+  },
+  "src/lib/images/workSection/project.png": {
+    "file": "_app/immutable/assets/project.e8ad7889.png",
+    "src": "src/lib/images/workSection/project.png"
+  },
+  "src/lib/images/workSection/solution.png": {
+    "file": "_app/immutable/assets/solution.6748f314.png",
+    "src": "src/lib/images/workSection/solution.png"
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.svelte"
+  },
+  "src/routes/all/+layout.css": {
+    "file": "_app/immutable/assets/_layout.671ed833.css",
+    "src": "src/routes/all/+layout.css"
+  },
+  "src/routes/all/+layout.svelte": {
+    "assets": [
+      "_app/immutable/assets/login.12981877.svg",
+      "_app/immutable/assets/fira-mono-cyrillic-ext-400-normal.3df7909e.woff2",
+      "_app/immutable/assets/fira-mono-all-400-normal.1e3b098c.woff",
+      "_app/immutable/assets/fira-mono-cyrillic-400-normal.c7d433fd.woff2",
+      "_app/immutable/assets/fira-mono-greek-ext-400-normal.9e2fe623.woff2",
+      "_app/immutable/assets/fira-mono-greek-400-normal.a8be01ce.woff2",
+      "_app/immutable/assets/fira-mono-latin-ext-400-normal.6bfabd30.woff2",
+      "_app/immutable/assets/fira-mono-latin-400-normal.e43b3538.woff2"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.671ed833.css",
+      "_app/immutable/assets/styles.0da06af2.css"
+    ],
+    "file": "entries/pages/all/_layout.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_stores.js",
+      "_logoS_M.js",
+      "_menu.js",
+      "_Grid.js",
+      "_mail.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/+layout.svelte"
+  },
+  "src/routes/all/+page.css": {
+    "file": "_app/immutable/assets/_page.b6c8f682.css",
+    "src": "src/routes/all/+page.css"
+  },
+  "src/routes/all/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/hero 1home.ec8f6878.png",
+      "_app/immutable/assets/icon1.c982e863.svg",
+      "_app/immutable/assets/icon2.b580af2e.svg",
+      "_app/immutable/assets/icon3.7aeae243.svg",
+      "_app/immutable/assets/icon4.ff5c4500.svg",
+      "_app/immutable/assets/techImage.1e264acb.png"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.b6c8f682.css"
+    ],
+    "file": "entries/pages/all/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_VerticalSpacer.js",
+      "_nehwe.js",
+      "_about us image.js",
+      "_location.js",
+      "_mail.js",
+      "_phone.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/+page.svelte"
+  },
+  "src/routes/all/+page.ts": {
+    "file": "entries/pages/all/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/all/+page.ts"
+  },
+  "src/routes/all/about/+page.css": {
+    "file": "_app/immutable/assets/_page.095b9142.css",
+    "src": "src/routes/all/about/+page.css"
+  },
+  "src/routes/all/about/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/aboutSec1.2aa8a989.png",
+      "_app/immutable/assets/meeting.ea670d2e.png",
+      "_app/immutable/assets/brainstroming.e792c051.png",
+      "_app/immutable/assets/project.e8ad7889.png",
+      "_app/immutable/assets/solution.6748f314.png",
+      "_app/immutable/assets/linkedin.5ce646b0.svg",
+      "_app/immutable/assets/github.8e23cdac.svg",
+      "_app/immutable/assets/behance.9e240b26.svg",
+      "_app/immutable/assets/2.477a05ab.jpg",
+      "_app/immutable/assets/3.1376b143.jpg",
+      "_app/immutable/assets/4.0d42a67e.jpg",
+      "_app/immutable/assets/5.92431bcb.jpg"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.095b9142.css"
+    ],
+    "file": "entries/pages/all/about/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_VerticalSpacer.js",
+      "_Grid.js",
+      "_about us image.js",
+      "_1.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/about/+page.svelte"
+  },
+  "src/routes/all/about/+page.ts": {
+    "file": "entries/pages/all/about/_page.ts.js",
+    "imports": [
+      "_prod-ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/about/+page.ts"
+  },
+  "src/routes/all/contact/+page.css": {
+    "file": "_app/immutable/assets/_page.a04923e5.css",
+    "src": "src/routes/all/contact/+page.css"
+  },
+  "src/routes/all/contact/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.a04923e5.css"
+    ],
+    "file": "entries/pages/all/contact/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_VerticalSpacer.js",
+      "_Grid.js",
+      "_location.js",
+      "_mail.js",
+      "_phone.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/contact/+page.svelte"
+  },
+  "src/routes/all/projects/+page.css": {
+    "file": "_app/immutable/assets/_page.9ce62cbd.css",
+    "src": "src/routes/all/projects/+page.css"
+  },
+  "src/routes/all/projects/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/cms.5fb49ab4.png",
+      "_app/immutable/assets/erp.a0b9dc0b.png",
+      "_app/immutable/assets/go scholarly.c8d9e5d8.png",
+      "_app/immutable/assets/srisriholistick.64353600.png",
+      "_app/immutable/assets/stupicks.b731c295.png"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.9ce62cbd.css"
+    ],
+    "file": "entries/pages/all/projects/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_VerticalSpacer.js",
+      "_Grid.js",
+      "_nehwe.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/projects/+page.svelte"
+  },
+  "src/routes/all/services/+page.css": {
+    "file": "_app/immutable/assets/_page.9e8d4380.css",
+    "src": "src/routes/all/services/+page.css"
+  },
+  "src/routes/all/services/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/webDevelopment.9cba338d.png",
+      "_app/immutable/assets/mobileappdevelopment.a2150c83.png",
+      "_app/immutable/assets/webHosting.e9d3814d.png",
+      "_app/immutable/assets/supportandMaintanance.1d53b5cc.png",
+      "_app/immutable/assets/IoTSolutions.e2635efc.png"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.9e8d4380.css"
+    ],
+    "file": "entries/pages/all/services/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_VerticalSpacer.js",
+      "_Grid.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/all/services/+page.svelte"
+  },
+  "src/routes/app/+layout.css": {
+    "file": "_app/immutable/assets/_layout.c28b3375.css",
+    "src": "src/routes/app/+layout.css"
+  },
+  "src/routes/app/+layout.svelte": {
+    "assets": [
+      "_app/immutable/assets/dashboard.e4c0c347.svg",
+      "_app/immutable/assets/team.be24b5c4.svg",
+      "_app/immutable/assets/tasks.5d87bc3e.svg",
+      "_app/immutable/assets/chat.817c838f.svg",
+      "_app/immutable/assets/tickets.fb631e5c.svg",
+      "_app/immutable/assets/payslip.2ded8e0f.svg",
+      "_app/immutable/assets/leaves.1434290e.svg",
+      "_app/immutable/assets/approvals.42531afe.svg",
+      "_app/immutable/assets/notification.14e35efc.svg",
+      "_app/immutable/assets/viewcalender.43cb5022.svg",
+      "_app/immutable/assets/fira-mono-cyrillic-ext-400-normal.3df7909e.woff2",
+      "_app/immutable/assets/fira-mono-all-400-normal.1e3b098c.woff",
+      "_app/immutable/assets/fira-mono-cyrillic-400-normal.c7d433fd.woff2",
+      "_app/immutable/assets/fira-mono-greek-ext-400-normal.9e2fe623.woff2",
+      "_app/immutable/assets/fira-mono-greek-400-normal.a8be01ce.woff2",
+      "_app/immutable/assets/fira-mono-latin-ext-400-normal.6bfabd30.woff2",
+      "_app/immutable/assets/fira-mono-latin-400-normal.e43b3538.woff2"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.c28b3375.css",
+      "_app/immutable/assets/styles.0da06af2.css"
+    ],
+    "file": "entries/pages/app/_layout.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_stores.js",
+      "_logoS_M.js",
+      "_menu.js",
+      "_profile.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/+layout.svelte"
+  },
+  "src/routes/app/approvals/+page.css": {
+    "file": "_app/immutable/assets/_page.7f126b63.css",
+    "src": "src/routes/app/approvals/+page.css"
+  },
+  "src/routes/app/approvals/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.7f126b63.css"
+    ],
+    "file": "entries/pages/app/approvals/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_profile.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/approvals/+page.svelte"
+  },
+  "src/routes/app/calender/+page.css": {
+    "file": "_app/immutable/assets/_page.f3de5658.css",
+    "src": "src/routes/app/calender/+page.css"
+  },
+  "src/routes/app/calender/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.f3de5658.css"
+    ],
+    "file": "entries/pages/app/calender/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/calender/+page.svelte"
+  },
+  "src/routes/app/chat/+page.css": {
+    "file": "_app/immutable/assets/_page.29d72faa.css",
+    "src": "src/routes/app/chat/+page.css"
+  },
+  "src/routes/app/chat/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/channel.f120af62.svg",
+      "_app/immutable/assets/dm.e04355f7.svg",
+      "_app/immutable/assets/video.4b9724ea.svg",
+      "_app/immutable/assets/call.35d9cb46.svg",
+      "_app/immutable/assets/send.dccd0b87.svg",
+      "_app/immutable/assets/addFill.0f0cc2eb.svg"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.29d72faa.css"
+    ],
+    "file": "entries/pages/app/chat/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index.js",
+      "_Grid.js",
+      "_add.js",
+      "_profile.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/chat/+page.svelte"
+  },
+  "src/routes/app/dashboard/+page.css": {
+    "file": "_app/immutable/assets/_page.04d51dfd.css",
+    "src": "src/routes/app/dashboard/+page.css"
+  },
+  "src/routes/app/dashboard/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.04d51dfd.css"
+    ],
+    "file": "entries/pages/app/dashboard/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/dashboard/+page.svelte"
+  },
+  "src/routes/app/employapprovals/+page.css": {
+    "file": "_app/immutable/assets/_page.90f0da58.css",
+    "src": "src/routes/app/employapprovals/+page.css"
+  },
+  "src/routes/app/employapprovals/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.90f0da58.css"
+    ],
+    "file": "entries/pages/app/employapprovals/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index.js",
+      "_Grid.js",
+      "_add.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/employapprovals/+page.svelte"
+  },
+  "src/routes/app/employes/+page.css": {
+    "file": "_app/immutable/assets/_page.fe82924c.css",
+    "src": "src/routes/app/employes/+page.css"
+  },
+  "src/routes/app/employes/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/employeeProfilePhoto.94cf4e3b.png"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.fe82924c.css"
+    ],
+    "file": "entries/pages/app/employes/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/employes/+page.svelte"
+  },
+  "src/routes/app/holidays/+page.css": {
+    "file": "_app/immutable/assets/_page.36b83de2.css",
+    "src": "src/routes/app/holidays/+page.css"
+  },
+  "src/routes/app/holidays/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.36b83de2.css"
+    ],
+    "file": "entries/pages/app/holidays/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_calender.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/holidays/+page.svelte"
+  },
+  "src/routes/app/leaves/+page.css": {
+    "file": "_app/immutable/assets/_page.79dabfe1.css",
+    "src": "src/routes/app/leaves/+page.css"
+  },
+  "src/routes/app/leaves/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.79dabfe1.css"
+    ],
+    "file": "entries/pages/app/leaves/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_calender.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/leaves/+page.svelte"
+  },
+  "src/routes/app/notifications/+page.css": {
+    "file": "_app/immutable/assets/_page.3a23c3bd.css",
+    "src": "src/routes/app/notifications/+page.css"
+  },
+  "src/routes/app/notifications/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.3a23c3bd.css"
+    ],
+    "file": "entries/pages/app/notifications/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/notifications/+page.svelte"
+  },
+  "src/routes/app/payslips/+page.css": {
+    "file": "_app/immutable/assets/_page.7a7ae0b6.css",
+    "src": "src/routes/app/payslips/+page.css"
+  },
+  "src/routes/app/payslips/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.7a7ae0b6.css"
+    ],
+    "file": "entries/pages/app/payslips/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/payslips/+page.svelte"
+  },
+  "src/routes/app/profile/+page.css": {
+    "file": "_app/immutable/assets/_page.566039f4.css",
+    "src": "src/routes/app/profile/+page.css"
+  },
+  "src/routes/app/profile/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/person.f52f8826.svg"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.566039f4.css"
+    ],
+    "file": "entries/pages/app/profile/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_index.js",
+      "_1.js",
+      "_mail.js",
+      "_phone.js",
+      "_add.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/profile/+page.svelte"
+  },
+  "src/routes/app/projects/+page.css": {
+    "file": "_app/immutable/assets/_page.f44d5622.css",
+    "src": "src/routes/app/projects/+page.css"
+  },
+  "src/routes/app/projects/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.f44d5622.css"
+    ],
+    "file": "entries/pages/app/projects/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_index.js",
+      "_add.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/projects/+page.svelte"
+  },
+  "src/routes/app/registrations/+page.css": {
+    "file": "_app/immutable/assets/_page.aef6297e.css",
+    "src": "src/routes/app/registrations/+page.css"
+  },
+  "src/routes/app/registrations/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.aef6297e.css"
+    ],
+    "file": "entries/pages/app/registrations/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_profile.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/registrations/+page.svelte"
+  },
+  "src/routes/app/tasks/+page.css": {
+    "file": "_app/immutable/assets/_page.6443a028.css",
+    "src": "src/routes/app/tasks/+page.css"
+  },
+  "src/routes/app/tasks/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.6443a028.css"
+    ],
+    "file": "entries/pages/app/tasks/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index.js",
+      "_Grid.js",
+      "_add.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/tasks/+page.svelte"
+  },
+  "src/routes/app/techstack/+page.css": {
+    "file": "_app/immutable/assets/_page.7f81cf4c.css",
+    "src": "src/routes/app/techstack/+page.css"
+  },
+  "src/routes/app/techstack/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.7f81cf4c.css"
+    ],
+    "file": "entries/pages/app/techstack/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Grid.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/techstack/+page.svelte"
+  },
+  "src/routes/app/tickets/+page.css": {
+    "file": "_app/immutable/assets/_page.67773024.css",
+    "src": "src/routes/app/tickets/+page.css"
+  },
+  "src/routes/app/tickets/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.67773024.css"
+    ],
+    "file": "entries/pages/app/tickets/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index.js",
+      "_Grid.js",
+      "_profile.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/app/tickets/+page.svelte"
+  },
+  "src/routes/login/+layout.css": {
+    "file": "_app/immutable/assets/_layout.e0998320.css",
+    "src": "src/routes/login/+layout.css"
+  },
+  "src/routes/login/+layout.svelte": {
+    "assets": [
+      "_app/immutable/assets/fira-mono-cyrillic-ext-400-normal.3df7909e.woff2",
+      "_app/immutable/assets/fira-mono-all-400-normal.1e3b098c.woff",
+      "_app/immutable/assets/fira-mono-cyrillic-400-normal.c7d433fd.woff2",
+      "_app/immutable/assets/fira-mono-greek-ext-400-normal.9e2fe623.woff2",
+      "_app/immutable/assets/fira-mono-greek-400-normal.a8be01ce.woff2",
+      "_app/immutable/assets/fira-mono-latin-ext-400-normal.6bfabd30.woff2",
+      "_app/immutable/assets/fira-mono-latin-400-normal.e43b3538.woff2"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.e0998320.css",
+      "_app/immutable/assets/styles.0da06af2.css"
+    ],
+    "file": "entries/pages/login/_layout.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/login/+layout.svelte"
+  },
+  "src/routes/login/+page.css": {
+    "file": "_app/immutable/assets/_page.488bd025.css",
+    "src": "src/routes/login/+page.css"
+  },
+  "src/routes/login/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/login.f40c5b0d.png"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.488bd025.css"
+    ],
+    "file": "entries/pages/login/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_logoS_M.js",
+      "_Grid.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/login/+page.svelte"
+  },
+  "styles.css": {
+    "file": "_app/immutable/assets/styles.0da06af2.css",
+    "src": "styles.css"
+  }
+}

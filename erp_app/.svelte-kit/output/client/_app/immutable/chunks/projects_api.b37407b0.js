@@ -1,0 +1,1 @@
+import{a,u as e}from"./axios.e7e8a860.js";const t=async()=>{try{return(await a.get(`${e}/projects`)).data}catch(r){console.log(r)}},c=async r=>{try{return(await a.post(`${e}/projects/add`,r)).data}catch(s){console.log(s)}};export{c as a,t as g};

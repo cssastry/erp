@@ -1,0 +1,1 @@
+import{s as a,o as e}from"../chunks/scheduler.4ea3d083.js";import{S as n,i as s}from"../chunks/index.647afbbe.js";function r(t){return e(()=>{localStorage.getItem("userData")?window.location.href="/app/dashboard":window.location.href="/all"}),[]}class c extends n{constructor(o){super(),s(this,o,r,null,a,{})}}export{c as component};

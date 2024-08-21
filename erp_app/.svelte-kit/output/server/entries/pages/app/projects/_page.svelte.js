@@ -1,0 +1,49 @@
+import { c as create_ssr_component, a as subscribe, e as escape, d as each, b as add_attribute, v as validate_component } from "../../../../chunks/ssr.js";
+import { G as Grid } from "../../../../chunks/Grid.js";
+import { w as writable } from "../../../../chunks/index.js";
+import { a as addIcon } from "../../../../chunks/add.js";
+const _page_svelte_svelte_type_style_lang = "";
+const css = {
+  code: "p.svelte-13ejv1a.svelte-13ejv1a{margin:0;padding:0}.leaves.svelte-13ejv1a.svelte-13ejv1a{background-color:var(--side-nav-color);min-height:93%;padding:1rem 2rem;border-radius:0.3rem}.banner-text.svelte-13ejv1a h6.svelte-13ejv1a{font-size:24px;color:var(--color-banner-text-1);margin:0}.banner-text.svelte-13ejv1a p.svelte-13ejv1a{font-size:15px;color:var(--color-bg-1);margin-bottom:0}.head.svelte-13ejv1a.svelte-13ejv1a{display:flex;justify-content:space-between;margin-bottom:1.5rem}.head.svelte-13ejv1a h2.svelte-13ejv1a{margin:0;padding:0}.buttons.svelte-13ejv1a.svelte-13ejv1a{display:flex;justify-content:space-between;gap:2rem}.buttons.svelte-13ejv1a button.svelte-13ejv1a{font-size:16px;font-weight:500;padding:0.5rem 1.2rem;border-radius:0.3rem;cursor:pointer}.leave.svelte-13ejv1a.svelte-13ejv1a{background-color:var(--color-special-text);color:var(--color-bg-2);border:none}.leaves-list.svelte-13ejv1a.svelte-13ejv1a{margin-top:1.5rem}.leaves-tab.svelte-13ejv1a.svelte-13ejv1a{background-color:var(--color-bg-3);padding:0.5rem 1rem;border-radius:0.5rem;cursor:pointer;min-height:8rem}.leaves-head.svelte-13ejv1a.svelte-13ejv1a{margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center}.details.svelte-13ejv1a .title.svelte-13ejv1a{font-size:1.2rem}.status.svelte-13ejv1a.svelte-13ejv1a{padding:0.2rem 0.8rem;display:flex;flex-direction:column;align-items:center}.popup-overlay.svelte-13ejv1a.svelte-13ejv1a{z-index:10;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.632);display:flex;justify-content:center;align-items:center}.popup.svelte-13ejv1a.svelte-13ejv1a{background-color:var(--color-bg-3);width:50%;height:auto;padding:2rem;border-radius:8px;box-shadow:0px 0px 10px rgba(0, 0, 0, 0.1)}.popup.svelte-13ejv1a form.svelte-13ejv1a{display:grid;grid-template-columns:auto;grid-row-gap:10px}form.svelte-13ejv1a input.svelte-13ejv1a,form.svelte-13ejv1a textarea.svelte-13ejv1a{background-color:var(--color-text);padding:0.8rem 0.8rem;border:none;margin-top:0.2rem;border-radius:0.5rem;color:var(--color-bg-4);font-size:1rem}form.svelte-13ejv1a input.svelte-13ejv1a::placeholder,form.svelte-13ejv1a textarea.svelte-13ejv1a::placeholder{color:var(--color-bg-4)}.popup.svelte-13ejv1a h2.svelte-13ejv1a{margin-top:0;color:var(--color-bg-0);font-size:25px}.form-button.svelte-13ejv1a.svelte-13ejv1a{width:100%;display:flex;justify-content:flex-end}form.svelte-13ejv1a button.svelte-13ejv1a{background-color:var(--color-banner-text-2);border:none;padding:0.8rem 2.5rem;margin-top:0.8rem;border-radius:0.3rem;color:var(--color-bg-1);font-weight:600;cursor:pointer}p.svelte-13ejv1a strong.svelte-13ejv1a,.techHeading.svelte-13ejv1a.svelte-13ejv1a{color:var(--color-bg-0)}.showAlltech.svelte-13ejv1a.svelte-13ejv1a{margin-bottom:1rem}.techName.svelte-13ejv1a.svelte-13ejv1a{background-color:var(--color-text);color:var(--color-bg-0);margin:0 0.2rem;padding:0.2rem 0.5rem;border-radius:0.5rem;font-size:0.8rem;cursor:pointer}.showSelected.svelte-13ejv1a.svelte-13ejv1a{width:100%;background-color:transparent;height:auto;min-height:2rem;border:1px solid var(--color-bg-0);margin-bottom:1rem;border-radius:0.5rem;padding:0.6rem 0.5rem 0 0.8rem}.tech.svelte-13ejv1a.svelte-13ejv1a{display:flex;align-items:center;padding:0 0 0 0.5rem;margin-top:-1rem;color:#ddd\n        }.techHeading.svelte-13ejv1a.svelte-13ejv1a{font-size:1rem;font-weight:600;padding:0;margin-right:0.5rem}.technology.svelte-13ejv1a.svelte-13ejv1a{font-size:0.8rem;margin:0 0.2rem}.add.svelte-13ejv1a.svelte-13ejv1a{background-color:var(--color-special-text);padding:0.3rem 0.8rem;border:none;color:var(--color-bg-0);border-radius:0.3rem;cursor:pointer;margin-top:1rem}.documents.svelte-13ejv1a.svelte-13ejv1a{margin-top:2rem;margin-bottom:1rem}.documentTab.svelte-13ejv1a.svelte-13ejv1a{font-size:1.1rem;padding:0.5rem 1rem;background-color:var(--side-nav-color);border-radius:1rem;color:var(--color-bg-0);display:flex;align-items:center;justify-content:space-between}.documentTab.svelte-13ejv1a span.svelte-13ejv1a{background-color:var(--color-special-text);font-size:0.8rem;padding:0.2rem 0.4rem;border-radius:2rem;cursor:pointer}",
+  map: null
+};
+const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $selectedProject, $$unsubscribe_selectedProject;
+  let $showpopup, $$unsubscribe_showpopup;
+  let projects = [];
+  const showpopup = writable({ visible: false });
+  $$unsubscribe_showpopup = subscribe(showpopup, (value) => $showpopup = value);
+  let selectedProject = writable(null);
+  $$unsubscribe_selectedProject = subscribe(selectedProject, (value) => $selectedProject = value);
+  let projectTechStack = [];
+  let projectDocuments = [];
+  $$result.css.add(css);
+  $$unsubscribe_selectedProject();
+  $$unsubscribe_showpopup();
+  return ` ${$$result.head += `<!-- HEAD_svelte-1onu32a_START -->${$$result.title = `<title>Projects</title>`, ""}<meta name="description" content="Svelte demo app"><!-- HEAD_svelte-1onu32a_END -->`, ""} <div class="leaves svelte-13ejv1a"> ${$showpopup.visible && !$selectedProject ? `  <div class="popup-overlay svelte-13ejv1a">  <div class="popup svelte-13ejv1a"><h2 class="svelte-13ejv1a" data-svelte-h="svelte-1xl1p7m">Add new project</h2> <form class="svelte-13ejv1a" data-svelte-h="svelte-1op0c3q"><input type="text" name="title" placeholder="Enter Title" required class="svelte-13ejv1a"> <input type="text" name="client" placeholder="Enter client Name" required class="svelte-13ejv1a"> <input type="date" name="startDate" placeholder="Start Date" required class="svelte-13ejv1a"> <textarea name="summary" placeholder="summary" rows="4" required class="svelte-13ejv1a"></textarea> <input type="file" name="logo" accept="image/*" required class="svelte-13ejv1a"> <div class="form-button svelte-13ejv1a"><button type="submit" class="svelte-13ejv1a">Add Project</button></div></form></div></div>` : ``}  ${$showpopup.visible && $selectedProject ? `  <div class="popup-overlay svelte-13ejv1a"> <div class="popup svelte-13ejv1a"><div class="form-button svelte-13ejv1a"><button data-svelte-h="svelte-4kup8o">X</button></div> <h2 class="svelte-13ejv1a" data-svelte-h="svelte-8503r3">Project Details</h2> <div class="details"><p class="svelte-13ejv1a"><strong class="svelte-13ejv1a" data-svelte-h="svelte-oarhuk">Title:</strong> ${escape($selectedProject.title)}</p> <p class="svelte-13ejv1a"><strong class="svelte-13ejv1a" data-svelte-h="svelte-ia7nlj">Client:</strong> ${escape($selectedProject.client)}</p> <p class="svelte-13ejv1a"><strong class="svelte-13ejv1a" data-svelte-h="svelte-1hk70fc">Start Date:</strong> ${escape($selectedProject.startDate)}</p> <p class="svelte-13ejv1a"><strong class="svelte-13ejv1a" data-svelte-h="svelte-y2oyey">Summary:</strong> ${escape($selectedProject.summary)}</p> <br> ${projectTechStack.length === 0 ? `${``} <button class="add svelte-13ejv1a">${escape("Add Techstack")}</button>` : `${`<div class="tech svelte-13ejv1a"><p class="techHeading svelte-13ejv1a" data-svelte-h="svelte-s4jmvd">TechStack :</p> ${each(projectTechStack, (name) => {
+    return `<span class="technology svelte-13ejv1a">${escape(name.techStackId.title)} ,</span>`;
+  })}</div>`} ${``} <button class="add svelte-13ejv1a">${escape("Add Techstack")}</button>`}</div> <div class="documents svelte-13ejv1a"><div class="head svelte-13ejv1a"><h2 class="svelte-13ejv1a">${escape("Project Documents")}</h2>  ${`<img${add_attribute("src", addIcon, 0)} alt="icon" width="25rem">`}</div> ${``} ${`${projectDocuments ? `${validate_component(Grid, "Grid").$$render($$result, { container: true, gutter: 15 }, {}, {
+    default: () => {
+      return ` ${each(projectDocuments, (document) => {
+        return `${validate_component(Grid, "Grid").$$render($$result, { xs: 3, md: 3, lg: 3 }, {}, {
+          default: () => {
+            return `<div class="documentTab svelte-13ejv1a"><p class="documentName svelte-13ejv1a">${escape(document.title)}</p> <span class="svelte-13ejv1a" data-svelte-h="svelte-thhg8d">X</span></div> `;
+          }
+        })}`;
+      })} `;
+    }
+  })}` : `<p class="svelte-13ejv1a" data-svelte-h="svelte-199l8cn">No documents uploaded</p>`}`}</div></div></div>` : ``} <div class="banner-text svelte-13ejv1a"><div class="head svelte-13ejv1a"><h6 class="svelte-13ejv1a" data-svelte-h="svelte-1mnc6z4">Projects</h6> <div class="buttons svelte-13ejv1a"><button class="leave svelte-13ejv1a" data-svelte-h="svelte-188mtf9">Add Project</button></div></div> <div class="leaves-list svelte-13ejv1a">${validate_component(Grid, "Grid").$$render($$result, { container: true, gutter: 15 }, {}, {
+    default: () => {
+      return `${projects.length > 0 ? `${each(projects, (item, index) => {
+        return ` ${validate_component(Grid, "Grid").$$render($$result, { xs: 12, md: 4, lg: 4 }, {}, {
+          default: () => {
+            return ` <div class="leaves-tab svelte-13ejv1a"><div class="leaves-head svelte-13ejv1a"><div class="details svelte-13ejv1a"><p class="title svelte-13ejv1a">${escape(item.title)}</p> <p class="clientName svelte-13ejv1a">${escape(item.client)}</p></div> <div class="status svelte-13ejv1a"><img${add_attribute("src", `data:image/jpeg;base64,${item.logo}`, 0)} alt="client logo" width="100rem"></div> </div></div> `;
+          }
+        })}`;
+      })}` : `<p class="svelte-13ejv1a" data-svelte-h="svelte-w2vesh">No Projects to show</p>`}`;
+    }
+  })}</div></div> </div>`;
+});
+export {
+  Page as default
+};

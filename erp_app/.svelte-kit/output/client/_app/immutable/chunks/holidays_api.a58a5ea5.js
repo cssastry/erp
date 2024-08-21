@@ -1,0 +1,1 @@
+import{a as o,u as r}from"./axios.e7e8a860.js";const t=async()=>{try{return(await o.get(`${r}/holidays`)).data}catch(a){console.log(a)}},n=async a=>{try{return(await o.post(`${r}/holidays/add`,a)).data}catch(s){console.log(s)}};export{n as a,t as g};
