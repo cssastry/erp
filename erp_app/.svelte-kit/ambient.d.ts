@@ -47,11 +47,14 @@ declare module '$env/static/private' {
 	export const npm_package_json: string;
 	export const pm_cwd: string;
 	export const NVM_INC: string;
+	export const node_version: string;
 	export const namespace: string;
+	export const version: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_local_prefix: string;
 	export const pm_exec_path: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
+	export const filter_env: string;
 	export const kill_retry_time: string;
 	export const pm_id: string;
 	export const unstable_restarts: string;
@@ -61,6 +64,7 @@ declare module '$env/static/private' {
 	export const node_args: string;
 	export const LOGNAME: string;
 	export const _: string;
+	export const versioning: string;
 	export const npm_config_prefix: string;
 	export const npm_config_npm_version: string;
 	export const XDG_SESSION_CLASS: string;
@@ -79,6 +83,7 @@ declare module '$env/static/private' {
 	export const NODE: string;
 	export const npm_package_name: string;
 	export const XDG_RUNTIME_DIR: string;
+	export const prev_restart_delay: string;
 	export const axm_options: string;
 	export const axm_dynamic: string;
 	export const vizion: string;
@@ -97,6 +102,7 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const npm_lifecycle_event: string;
 	export const automation: string;
+	export const exit_code: string;
 	export const vizion_running: string;
 	export const args: string;
 	export const instance_var: string;
@@ -169,11 +175,14 @@ declare module '$env/dynamic/private' {
 		npm_package_json: string;
 		pm_cwd: string;
 		NVM_INC: string;
+		node_version: string;
 		namespace: string;
+		version: string;
 		npm_config_userconfig: string;
 		npm_config_local_prefix: string;
 		pm_exec_path: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
+		filter_env: string;
 		kill_retry_time: string;
 		pm_id: string;
 		unstable_restarts: string;
@@ -183,6 +192,7 @@ declare module '$env/dynamic/private' {
 		node_args: string;
 		LOGNAME: string;
 		_: string;
+		versioning: string;
 		npm_config_prefix: string;
 		npm_config_npm_version: string;
 		XDG_SESSION_CLASS: string;
@@ -201,6 +211,7 @@ declare module '$env/dynamic/private' {
 		NODE: string;
 		npm_package_name: string;
 		XDG_RUNTIME_DIR: string;
+		prev_restart_delay: string;
 		axm_options: string;
 		axm_dynamic: string;
 		vizion: string;
@@ -219,6 +230,7 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		npm_lifecycle_event: string;
 		automation: string;
+		exit_code: string;
 		vizion_running: string;
 		args: string;
 		instance_var: string;
