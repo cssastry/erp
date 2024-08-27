@@ -1,10 +1,9 @@
 import { url } from "../utils";
 import axios from "axios";
 
-// @ts-ignore
-const getprojectDetailsById = async (id) => {
+const getAll = async () => {
   try {
-    let response = await axios.get(`${url}/projectdetails/getbyid/${id}`);
+    let response = await axios.get(`${url}/projectdetails`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -12,7 +11,7 @@ const getprojectDetailsById = async (id) => {
 };
 
 // @ts-ignore
-const addprojectDetails = async (payload) => {
+const add = async (payload) => {
   try {
     let response = await axios.post(`${url}/projectdetails/add`, payload);
     return response.data;
@@ -22,7 +21,17 @@ const addprojectDetails = async (payload) => {
 };
 
 // @ts-ignore
-const deleteByIdprojectDetails = async (id) => {
+const update = async (id, payload) => {
+  try {
+    let response = await axios.patch(`${url}/projectdetails/update/${id}`, payload);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// @ts-ignore
+const deleteById = async (id) => {
   try {
     let response = await axios.delete(`${url}/projectdetails/delete/${id}`);
     return response.data;
@@ -31,4 +40,4 @@ const deleteByIdprojectDetails = async (id) => {
   }
 };
 
-export { addprojectDetails, deleteByIdprojectDetails, getprojectDetailsById };
+export { getAll, add, update, deleteById };
