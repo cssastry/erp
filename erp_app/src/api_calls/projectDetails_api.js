@@ -9,9 +9,17 @@ const getAll = async () => {
     console.log(error);
   }
 };
+const getprojectDetailsById = async (id) => {
+  try {
+    let response = await axios.get(`${url}/projectdetails/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // @ts-ignore
-const add = async (payload) => {
+const addprojectDetails = async (payload) => {
   try {
     let response = await axios.post(`${url}/projectdetails/add`, payload);
     return response.data;
@@ -31,7 +39,7 @@ const update = async (id, payload) => {
 };
 
 // @ts-ignore
-const deleteById = async (id) => {
+const deleteByIdprojectDetails = async (id) => {
   try {
     let response = await axios.delete(`${url}/projectdetails/delete/${id}`);
     return response.data;
@@ -40,4 +48,4 @@ const deleteById = async (id) => {
   }
 };
 
-export { getAll, add, update, deleteById };
+export { getprojectDetailsById, addprojectDetails, deleteByIdprojectDetails, getAll, update };
