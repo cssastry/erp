@@ -1,0 +1,1 @@
+import{a as e,u as s}from"./axios.39ef4a2e.js";const o=async()=>{try{return(await e.get(`${s}/techstack`)).data}catch(a){console.log(a)}},c=async a=>{try{return(await e.post(`${s}/techstack/add`,a)).data}catch(t){console.log(t)}};export{c as a,o as g};

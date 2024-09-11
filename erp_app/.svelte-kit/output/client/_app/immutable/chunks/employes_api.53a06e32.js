@@ -1,1 +1,0 @@
-import{a as s,u as o}from"./axios.e7e8a860.js";const n=async()=>{try{return(await s.get(`${o}/employes`)).data}catch(e){console.log(e)}},c=async e=>{try{return(await s.post(`${o}/employes/add`,e)).data}catch(a){console.log(a)}},l=async(e,a)=>{try{return(await s.patch(`${o}/employes/update/${e}`,a)).data}catch(t){console.log(t)}};export{c as a,n as g,l as u};

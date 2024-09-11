@@ -131,7 +131,15 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n\n<head>\n	<meta charset="utf-8" />\n	<link rel="icon" href="../src/lib/images/logoS&M.png" type="image/x-icon" />\n	<meta name="viewport" content="width=device-width" />\n	' + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents">' + body + "</div>\n</body>\n\n</html>",
+    app: ({ head, body, assets: assets2, nonce, env }) => `<!DOCTYPE html>
+<html lang="en">
+	<script>
+	import logo from './lib/images/logosm.png'<\/script>
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="./lib/images/logosm.png" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width" />
+	` + head + '\n</head>\n\n<body data-sveltekit-preload-data="hover">\n	<div style="display: contents">' + body + "</div>\n</body>\n\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -203,7 +211,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "d3cce5"
+  version_hash: "1ikca8s"
 };
 function get_hooks() {
   return {};
