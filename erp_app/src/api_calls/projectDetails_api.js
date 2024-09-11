@@ -11,7 +11,7 @@ const getAll = async () => {
 };
 const getprojectDetailsById = async (id) => {
   try {
-    let response = await axios.get(`${url}/projectdetails/${id}`);
+    let response = await axios.get(`${url}/projectdetails/getbyid/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
